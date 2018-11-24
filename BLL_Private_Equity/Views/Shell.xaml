@@ -1,0 +1,111 @@
+﻿<telerik:RadRibbonWindow x:Class="BLL_Private_Equity.Views.Shell"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+       xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"                 
+        xmlns:prism="http://prismlibrary.com/"
+        prism:ViewModelLocator.AutoWireViewModel="true"
+        xmlns:telerik="http://schemas.telerik.com/2008/xaml/presentation"
+        xmlns:infra="clr-namespace:BLL_Infrastructure;assembly=BLL_Infrastructure"
+        xmlns:local="clr-namespace:BLL_Private_Equity"
+        mc:Ignorable="d"
+        Title="Shell" >
+    <telerik:EventToCommandBehavior.EventBindings>
+        <telerik:EventBinding EventName="Loaded" Command="{Binding WindowLoadedCommand}"></telerik:EventBinding>
+    </telerik:EventToCommandBehavior.EventBindings>
+    <telerik:RadRibbonWindow.Resources>
+        <Style TargetType="telerik:RadTabItem">
+            <Setter Property="Header" Value="{Binding DataContext.TabTitle}"/>
+            <Setter Property="HeaderTemplate">
+                <Setter.Value>
+                    <DataTemplate>
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition />
+                                <ColumnDefinition />
+                            </Grid.ColumnDefinitions>
+                            <ContentControl VerticalAlignment="Center" HorizontalAlignment="Center"
+                                            Content="{Binding}">
+                                <i:Interaction.Triggers>
+                                    <i:EventTrigger EventName="MouseUp">
+                                        <local:SelectTabAction/>
+                                    </i:EventTrigger>
+                                </i:Interaction.Triggers>
+                            </ContentControl>
+
+                            <TextBlock Text="{StaticResource GlyphClose}"    Grid.Column="1"   Margin="5 0 0 0"                                        
+                                                FontFamily="{StaticResource TelerikWebUI}"
+                                               FontSize="{telerik:MaterialResource ResourceKey=FontSize}"
+                                               Foreground="{Binding RelativeSource={RelativeSource AncestorType=telerik:RadTabItem}, Path=HeaderForeground}"
+                                               >
+                                     <i:Interaction.Triggers>
+                                    <i:EventTrigger EventName="MouseUp">
+                                       <local:CloseTabAction/>
+                                    </i:EventTrigger>
+                                </i:Interaction.Triggers>
+                            </TextBlock>
+
+                        </Grid>
+                    </DataTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+    </telerik:RadRibbonWindow.Resources>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <telerik:RadRibbonView prism:RegionManager.RegionName="{x:Static infra:RegionNames.RibbonTabRegion}"                              
+                               Grid.ColumnSpan="3"
+                               ApplicationName="HQT Private Equity Administration">
+            <telerik:EventToCommandBehavior.EventBindings>
+                <telerik:EventBinding EventName="SelectionChanged" Command="{Binding RibbonViewSelectionChangedCommand}" PassEventArgsToCommand="True"/>
+            </telerik:EventToCommandBehavior.EventBindings>
+        </telerik:RadRibbonView>
+        <Grid Grid.Row="1">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="35"/>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="auto"/>
+                <ColumnDefinition Width="5"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <!--ApplicationButtonImageSource="/HQT Private Equity;component/Images/HQTrust Logo.png"-->
+
+            <telerik:RadOutlookBar Grid.Row="0" MinContentHeight="40" ActiveItemsMaxCount="3">
+
+                <telerik:RadOutlookBarItem Header="Investoren">
+                    <ContentControl prism:RegionManager.RegionName="{x:Static infra:RegionNames.InvestorRegion}"></ContentControl>
+                </telerik:RadOutlookBarItem>
+                <telerik:RadOutlookBarItem Header="Funds">
+                    <ContentControl prism:RegionManager.RegionName="{x:Static infra:RegionNames.PeFundRegion}"></ContentControl>
+                <!--</telerik:RadOutlookBarItem>
+                <telerik:RadOutlookBarItem Header="HQT Betreuer">
+                    <ContentControl prism:RegionManager.RegionName="{x:Static infra:RegionNames.HqtAdvisorRegion}"></ContentControl>-->
+                </telerik:RadOutlookBarItem>
+                <telerik:RadOutlookBarItem Header="Kundenbetreuer">
+                    <ContentControl prism:RegionManager.RegionName="{x:Static infra:RegionNames.ClientAdvisorRegion}"></ContentControl>
+                </telerik:RadOutlookBarItem>
+                <telerik:RadOutlookBarItem Header="Initiatoren">
+                    <ContentControl prism:RegionManager.RegionName="{x:Static infra:RegionNames.InitiatorRegion}"></ContentControl>
+                </telerik:RadOutlookBarItem>
+                <telerik:RadOutlookBarItem Header="Einstellungen">
+                    <ContentControl prism:RegionManager.RegionName="{x:Static infra:RegionNames.AppSettingsRegion}"></ContentControl>
+                </telerik:RadOutlookBarItem>
+                <telerik:RadOutlookBarItem Header="Portfolio-Analyse" IsSelected="{Binding AnalyzingRequired, Mode=TwoWay}">
+                    <ContentControl prism:RegionManager.RegionName="{x:Static infra:RegionNames.AnalyzeSettingsRegion}"></ContentControl>
+                </telerik:RadOutlookBarItem>
+            </telerik:RadOutlookBar>
+            <telerik:RadTabControl Grid.Row="0" Grid.Column="2"
+                    prism:RegionManager.RegionName="{x:Static infra:RegionNames.TabControlRegion}"></telerik:RadTabControl>
+            <ContentControl Grid.Row="1" Grid.ColumnSpan="3"
+                        prism:RegionManager.RegionName="{x:Static infra:RegionNames.StatusBarRegion}"></ContentControl>
+        </Grid>
+
+
+    </Grid>
+</telerik:RadRibbonWindow>

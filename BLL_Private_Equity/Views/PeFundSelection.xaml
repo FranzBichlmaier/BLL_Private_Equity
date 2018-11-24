@@ -1,0 +1,71 @@
+﻿<UserControl x:Class="BLL_Private_Equity.Views.PeFundSelection"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+           xmlns:prism="http://prismlibrary.com/"
+             prism:ViewModelLocator.AutoWireViewModel="True"
+             xmlns:telerik="http://schemas.telerik.com/2008/xaml/presentation"             
+             mc:Ignorable="d">
+    
+    <telerik:EventToCommandBehavior.EventBindings>
+        <telerik:EventBinding EventName="Loaded" Command="{Binding LoadedCommand}"></telerik:EventBinding>
+    </telerik:EventToCommandBehavior.EventBindings>
+    <UserControl.Resources>
+        <DataTemplate x:Key="PefundTemplate">
+            <Grid Margin="0 3">
+                <Grid.RowDefinitions>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions >
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                </Grid.ColumnDefinitions>
+                <TextBlock Grid.Row="0" Grid.Column="0"
+                           Text="{Binding FundHqTrustNumber}" Margin="0 0 5 0"
+                           FontSize="{telerik:MaterialResource ResourceKey=FontSizeS}"/>
+                <TextBlock Grid.Row="0" Grid.Column="1" Margin="5 0 0 0"
+                           Text="{Binding FundName}"
+                           FontSize="{telerik:MaterialResource ResourceKey=FontSizeS}"/>
+                <TextBlock Grid.Row="1" Grid.Column="0" Margin="0 0 5 0"
+                           Text="{Binding FundShortName}"
+                           FontSize="{telerik:MaterialResource ResourceKey=FontSizeS}"/>
+                <TextBlock Grid.Row="1" Grid.Column="1"  Margin="5 0 0 0"
+                           Text="{Binding FundLegalName}"
+                           FontSize="{telerik:MaterialResource ResourceKey=FontSizeS}"/>
+            </Grid>
+        </DataTemplate>
+    </UserControl.Resources>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <DockPanel LastChildFill="False">
+            <telerik:RadWatermarkTextBox WatermarkContent="Suchbegriff" Text="{Binding FilterText}"></telerik:RadWatermarkTextBox>
+            <telerik:RadButton FontFamily="{StaticResource TelerikWebUI}" ToolTip="Filter löschen" Content="{StaticResource GlyphClose}"
+                               Command="{Binding DeleteFilterCommand}"/>
+            <telerik:RadButton FontFamily="{StaticResource TelerikWebUI}" ToolTip="Filtern" Content="{StaticResource GlyphZoom}"
+                               DockPanel.Dock="Right"
+                               Command="{Binding FilterCommand}"/>
+        </DockPanel>
+
+        <telerik:RadBusyIndicator IsBusy="{Binding PeFundsLoading}" Grid.Row="1"
+                             BusyContent="Fund Informationen werden geladen ...">
+            <Grid>
+                <telerik:RadListBox x:Name="PefundListBox"
+                    ItemsSource="{Binding PeFundList}"
+                            ItemTemplate="{StaticResource PefundTemplate}"
+                                    SelectedItem="{Binding SelectedPefund,Mode=TwoWay}">
+                    <telerik:EventToCommandBehavior.EventBindings>
+                        <telerik:EventBinding EventName="SelectionChanged" Command="{Binding PefundSelectedCommand}">
+                        </telerik:EventBinding>
+                    </telerik:EventToCommandBehavior.EventBindings>
+                </telerik:RadListBox>
+
+            </Grid>
+        </telerik:RadBusyIndicator>
+
+    </Grid>
+</UserControl>

@@ -1,0 +1,29 @@
+﻿<telerik:RadRibbonTab x:Class="BLL_Private_Equity.RibbonTabs.ClientAdvisorRibbonTab"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:telerik="http://schemas.telerik.com/2008/xaml/presentation"            
+             mc:Ignorable="d" 
+             Header="Kundenberater" IsSelected="True">
+    <telerik:RadRibbonGroup Header="Kundenberater">
+        <telerik:RadRibbonButton Text="speichern" Command="{Binding SaveChangesCommand}" 
+                                 IsAutoSize="True"
+                                 LargeImage="{telerik:RadGlyph Glyph={StaticResource GlyphSave}, Size=32}"
+                                 SmallImage="{telerik:RadGlyph Glyph={StaticResource GlyphSave}, Size=16}"
+                                 />
+        <telerik:RadRibbonButton Text="verwerfen" Command="{Binding CancelChangesCommand}"
+                                  LargeImage="{telerik:RadGlyph Glyph={StaticResource GlyphReset}, Size=32}"
+                                 SmallImage="{telerik:RadGlyph Glyph={StaticResource GlyphReset}, Size=16}"
+                                 IsAutoSize="True"/>
+        <telerik:RadRibbonButton Text="löschen" Command="{Binding RemoveItemCommand}"
+                                  LargeImage="{telerik:RadGlyph Glyph={StaticResource GlyphDelete}, Size=32}"
+                                 SmallImage="{telerik:RadGlyph Glyph={StaticResource GlyphDelete}, Size=16}"
+                                 IsAutoSize="True"/>
+        <telerik:RadRibbonButton Text="zeige Investoren" Command="{Binding ShowInvestorsCommand}"
+                                  LargeImage="{telerik:RadGlyph Glyph={StaticResource GlyphGridLayout}, Size=32}"
+                                 SmallImage="{telerik:RadGlyph Glyph={StaticResource GlyphGridLayout}, Size=16}"
+                                 IsAutoSize="True"/>
+    </telerik:RadRibbonGroup>
+    </telerik:RadRibbonTab>
+

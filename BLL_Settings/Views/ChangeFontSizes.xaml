@@ -1,0 +1,71 @@
+﻿<UserControl x:Class="BLL_Settings.Views.ChangeFontSizes"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+              xmlns:prism="http://prismlibrary.com/"
+             prism:ViewModelLocator.AutoWireViewModel="true"
+             xmlns:telerik="http://schemas.telerik.com/2008/xaml/presentation"            
+             mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="800">
+    <StackPanel Margin="10 30 10 30">
+        <TextBlock Text=" Ändern der Schriftgrössen " 
+                   Style="{StaticResource SettingsHeader}"/>
+
+        <StackPanel Orientation="Horizontal" Margin="0 20 0 0">
+            <TextBlock Text="normale aktuelle Schriftgröße: " Margin="0 0 10 0" VerticalAlignment="Center" Width="180"/>
+            <TextBlock Text="Beispieltext in normaler Schriftgröße" FontSize="{Binding NewNormal}"/>
+        </StackPanel>
+        <StackPanel Orientation="Horizontal" Margin="0 20 0 0">
+            <TextBlock Text="kleine aktuelle Schriftgröße: " Margin="0 0 10 0" VerticalAlignment="Center" Width="180"/>
+            <TextBlock Text="Beispieltext in kleiner Schriftgröße" FontSize="{Binding NewSmall}"/>
+        </StackPanel>
+        <StackPanel Orientation="Horizontal" Margin="0 20 0 0">
+            <TextBlock Text="große aktuelle Schriftgröße: " Margin="0 0 10 0" VerticalAlignment="Center" Width="180"/>
+            <TextBlock Text="Beispieltext in großer Schriftgröße" FontSize="{Binding NewLarge}"/>
+        </StackPanel>
+        <Grid Margin="0 50 0 0" Width="250" HorizontalAlignment="Left">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="3*"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="3*"/>
+                <RowDefinition Height="2*"/>
+                <RowDefinition Height="2*"/>
+                <RowDefinition Height="2*"/>
+            </Grid.RowDefinitions>
+            <TextBlock Grid.Row="1" Text="kleine Schriftgröße" HorizontalAlignment="Right"
+                       VerticalAlignment="Center" Margin="0 0 10 0"/>
+            <TextBlock Grid.Row="2" Text="normale Schriftgröße" HorizontalAlignment="Right"
+                       VerticalAlignment="Center" Margin="0 0 10 0"/>
+            <TextBlock Grid.Row="3" Text="große Schriftgröße" HorizontalAlignment="Right"
+                       VerticalAlignment="Center" Margin="0 0 10 0"/>
+            <TextBlock Grid.Row="0" Grid.Column="1" Text="aktuell" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+            <TextBlock Grid.Row="0" Grid.Column="2" Text="neu" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+            <TextBlock Grid.Column="1" Grid.Row="1" Text="{Binding SmallSize, StringFormat=N1}" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+            <TextBlock Grid.Column="1" Grid.Row="2" Text="{Binding NormalSize, StringFormat=N1}" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+            <TextBlock Grid.Column="1" Grid.Row="3" Text="{Binding LargeSize, StringFormat=N1}" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+            <TextBox Grid.Column="2" Grid.Row="1" Text="{Binding NewSmall, StringFormat=N1}" VerticalAlignment="Center" HorizontalAlignment="Center"
+                     ToolTip="Fontsizes in Pixel zwischen 8px und 20px">
+                <telerik:EventToCommandBehavior.EventBindings>
+                    <telerik:EventBinding EventName="LostFocus" Command="{Binding FontSizeChangedCommand}"/>
+                </telerik:EventToCommandBehavior.EventBindings>
+            </TextBox>
+            <TextBox Grid.Column="2" Grid.Row="2" Text="{Binding NewNormal, StringFormat=N1}" VerticalAlignment="Center" HorizontalAlignment="Center"
+                     ToolTip="Fontsizes in Pixel zwischen 8px und 20px">
+                <telerik:EventToCommandBehavior.EventBindings>
+                    <telerik:EventBinding EventName="LostFocus" Command="{Binding FontSizeChangedCommand}"/>
+                </telerik:EventToCommandBehavior.EventBindings>
+            </TextBox>
+            <TextBox Grid.Column="2" Grid.Row="3" Text="{Binding NewLarge, StringFormat=N1}" VerticalAlignment="Center" HorizontalAlignment="Center"
+                     ToolTip="Fontsizes in Pixel zwischen 8px und 20px">
+                <telerik:EventToCommandBehavior.EventBindings>
+                    <telerik:EventBinding EventName="LostFocus" Command="{Binding FontSizeChangedCommand}"/>
+                </telerik:EventToCommandBehavior.EventBindings>
+            </TextBox>
+        </Grid>
+
+    </StackPanel>
+</UserControl>

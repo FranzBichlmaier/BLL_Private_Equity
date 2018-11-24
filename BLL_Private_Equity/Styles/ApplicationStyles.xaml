@@ -1,0 +1,83 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:telerik="http://schemas.telerik.com/2008/xaml/presentation"
+                    xmlns:telerikHelper="clr-namespace:BLL_Private_Equity.TelerikHelper"
+                    xmlns:xceed="http://schemas.xceed.com/wpf/xaml/toolkit" >
+    
+    
+    <Style x:Key="SettingsHeader" TargetType="TextBlock">       
+        <Setter Property="Foreground" Value="{telerik:MaterialResource ResourceKey=PrimaryNormalBrush}"/>
+        <Setter Property="FontWeight" Value="Bold"/>
+        <Setter Property="FontSize" Value="20"/>
+        <Setter Property="Height" Value="50"/>
+        <Setter Property="Width" Value="{Binding ActualWidth,RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type StackPanel}}}"/>
+        <Setter Property="HorizontalAlignment" Value="Left"/>
+        <Setter Property="Padding" Value="5 5 5 5"/>
+        <Setter Property="Margin" Value="5 20 5 20"/>
+    </Style>
+    <Style TargetType="telerik:DataFormDataField">
+        <Setter Property="LabelPosition" Value="Beside"/>
+        <Setter Property="Margin" Value="0 0 0 10"/>
+        <Setter Property="Width" Value="600"/>
+    </Style>
+    <Style TargetType="telerik:DataFormComboBoxField">
+        <Setter Property="LabelPosition" Value="Beside"/>
+        <Setter Property="Margin" Value="0 0 0 10"/>
+        <Setter Property="Width" Value="600"/>
+    </Style>
+    <Style TargetType="telerik:DataFormDateField">
+        <Setter Property="LabelPosition" Value="Beside"/>
+        <Setter Property="Margin" Value="0 0 0 10"/>
+        <Setter Property="Width" Value="600"/>
+    </Style>
+    <Style TargetType="telerikHelper:DataFormTextBoxMultilineField">
+        <Setter Property="LabelPosition" Value="Beside"/>
+        <Setter Property="Margin" Value="0 0 0 10"/>
+        <Setter Property="Width" Value="600"/>
+    </Style>
+    <Style TargetType="telerik:DataFormCheckBoxField">
+        <Setter Property="Margin" Value="0 0 0 10"/>
+        <Setter Property="Width" Value="600"/>
+    </Style>
+    <Style TargetType="xceed:ChildWindow">
+        <Setter Property="WindowBackground" Value="{telerik:MaterialResource ResourceKey=PrimaryNormalBrush}"></Setter>
+        <Setter Property="CaptionForeground" Value="{telerik:MaterialResource ResourceKey=PrimaryBrush}"></Setter>
+        <Setter Property="CaptionFontSize" Value="{telerik:MaterialResource ResourceKey=FontSizeL}"></Setter>
+        <Setter Property="FontFamily" Value="{telerik:MaterialResource ResourceKey=FontFamily}"></Setter>
+        <Setter Property="CloseButtonVisibility" Value="Collapsed"/>
+        <Setter Property="IsModal" Value="True"/>
+    </Style>
+    <Style TargetType="telerik:RadRibbonGroup">
+        <Setter Property="DefaultVariant" Value="Small"></Setter>
+    </Style>
+
+
+    <telerik:ChartPalette x:Key="HqTrustPalette">
+        <telerik:ChartPalette.SeriesEntries>
+            <telerik:PaletteEntryCollection SeriesFamily="Pie">
+                <telerik:PaletteEntry Fill="#FF847c7a" Stroke="White" />
+                <telerik:PaletteEntry Fill="#FF8d6b8d" Stroke="White" />
+                <telerik:PaletteEntry Fill="#FFb2524e" Stroke="White" />
+                <telerik:PaletteEntry Fill="#FFc46e3f" Stroke="White" />
+                <telerik:PaletteEntry Fill="#Ff9d8214" Stroke="White" />
+                <telerik:PaletteEntry Fill="#Ff718243" Stroke="White" />
+                <telerik:PaletteEntry Fill="#FF1e808f" Stroke="White" />
+                <telerik:PaletteEntry Fill="#FF40789b" Stroke="White" />
+            </telerik:PaletteEntryCollection>
+        </telerik:ChartPalette.SeriesEntries>
+        <telerik:ChartPalette.GlobalEntries>
+            <telerik:PaletteEntry Fill="#FF847c7a" Stroke="#FF847c7a" />
+            <telerik:PaletteEntry Fill="#FF8d6b8d" Stroke="#FF8d6b8d" />
+            <telerik:PaletteEntry Fill="#FFb2524e" Stroke="#FFb2524e" />
+            <telerik:PaletteEntry Fill="#FFc46e3f" Stroke="#FFc46e3f" />
+            <telerik:PaletteEntry Fill="#Ff9d8214" Stroke="#Ff9d8214" />
+            <telerik:PaletteEntry Fill="#Ff718243" Stroke="#Ff718243" />
+            <telerik:PaletteEntry Fill="#FF1e808f" Stroke="#FF1e808f" />
+            <telerik:PaletteEntry Fill="#FF40789b" Stroke="#FF40789b" />
+        </telerik:ChartPalette.GlobalEntries>
+    </telerik:ChartPalette>
+
+
+
+</ResourceDictionary>
+

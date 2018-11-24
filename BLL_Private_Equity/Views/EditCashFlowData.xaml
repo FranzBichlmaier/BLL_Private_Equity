@@ -1,0 +1,230 @@
+﻿<UserControl x:Class="BLL_Private_Equity.Views.EditCashFlowData"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
+             xmlns:telerik="http://schemas.telerik.com/2008/xaml/presentation"
+             xmlns:telerikHelper="clr-namespace:BLL_Private_Equity.TelerikHelper"
+             xmlns:converter="clr-namespace:BLL_Private_Equity.Converter"             
+             xmlns:prism="http://prismlibrary.com/"
+             prism:ViewModelLocator.AutoWireViewModel="true"
+             xmlns:xceed="http://schemas.xceed.com/wpf/xaml/toolkit"
+             mc:Ignorable="d" 
+             >
+    <i:Interaction.Triggers>
+        <prism:InteractionRequestTrigger SourceObject="{Binding NotificationRequest}">
+            <prism:PopupWindowAction IsModal="True" CenterOverAssociatedObject="True"></prism:PopupWindowAction>
+        </prism:InteractionRequestTrigger>
+        <prism:InteractionRequestTrigger SourceObject="{Binding ConfirmationRequest}">
+            <prism:PopupWindowAction IsModal="True" CenterOverAssociatedObject="True"></prism:PopupWindowAction>
+        </prism:InteractionRequestTrigger>
+    </i:Interaction.Triggers>
+    <UserControl.Resources>
+        <converter:DifferenceToBackgroundConverter x:Key="BackgroundConverter"/>
+        <converter:DifferenceToForegroundConverter x:Key="ForegroundConverter"/>
+        <converter:StatusToBackgroundColorConverter x:Key="BoolToBackgroundConverter"/>
+        <converter:StatusToForegroundColorConverter x:Key="BoolToForegroundConverter"/>
+        <telerik:BooleanToVisibilityConverter x:Key="BooleanToVisibility"/>
+
+        <DataTemplate x:Key="NewInvestorCommitmentDataTemplate">
+            <Grid></Grid>
+        </DataTemplate>
+    </UserControl.Resources>
+    <Grid x:Name="RootLayout" >
+        <Grid.RowDefinitions>
+            <RowDefinition Height="80"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="40"/>
+        </Grid.RowDefinitions>
+
+        <xceed:ChildWindow Grid.Row="0" Grid.RowSpan="3" WindowState="{Binding ShowTestLetter, Mode=TwoWay}"
+                           CloseButtonVisibility="Visible" Caption="Test-Anschreiben" >
+            <Border >
+                <telerik:RadBusyIndicator IsBusy="{Binding IsCreatingDocuments, Mode=TwoWay}" BusyContent="Die Dokumente werden erstellt ...">
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="auto"/>
+                            <RowDefinition Height="*"/>
+                        </Grid.RowDefinitions>
+                        <telerik:RadPdfViewerToolBar RadPdfViewer="{Binding ElementName=pdfViewer, Mode=OneTime}"
+                                                 HasOpenButton="False" HasClockwiseButton="false"
+                                                 HasSaveButton="False"
+                                                 HasCounterclockwiseButton="False"
+                                                 HasSignatureButton="False" />
+                        <telerik:RadPdfViewer x:Name="pdfViewer" Document="{Binding TestLetterPath}" HorizontalAlignment="Left" Grid.Row="1"
+                                      Width="{Binding ElementName=RootLayout, Path=ActualWidth}"
+                                          />
+
+                    </Grid>
+                </telerik:RadBusyIndicator>
+            </Border>
+        </xceed:ChildWindow>
+
+
+        <DockPanel Grid.Row="0" LastChildFill="False">
+            <Button DockPanel.Dock="Right" VerticalAlignment="Center" Margin="0 0 20 0"
+                    Background="{Binding DataInputDone, Converter={StaticResource BoolToBackgroundConverter}}"
+                    Command="{Binding GotoNextStepCommand}">
+                <StackPanel Orientation="Horizontal">
+                    <TextBlock Text="weiter" Margin="0 0 15 0" FontSize="20"
+                               Padding="15 0 0 0"
+                               Foreground="{Binding DataInputDone, Converter={StaticResource BoolToForegroundConverter}}" Background="Transparent"
+                               VerticalAlignment="Center"></TextBlock>
+                    <TextBlock Text="{StaticResource GlyphArrowChevronRight}" FontFamily="{StaticResource TelerikWebUI}"
+                               FontSize="32" Foreground="{Binding DataInputDone, Converter={StaticResource BoolToForegroundConverter}}" Background="Transparent"
+                               VerticalAlignment="Center"></TextBlock>
+                </StackPanel>
+            </Button>
+            <Button DockPanel.Dock="Right" VerticalAlignment="Center" Margin="0 0 20 0"
+                    Command="{Binding PrintTestLetterCommand}" Background="{Binding DataInputDone, Converter={StaticResource BoolToBackgroundConverter}}">
+                <StackPanel Orientation="Horizontal">
+                    <TextBlock Text="Test-Anschreiben drucken" Margin="0 0 15 0" FontSize="20"
+                               Padding="15 0 0 0"
+                               Foreground="{Binding DataInputDone, Converter={StaticResource BoolToForegroundConverter}}" Background="Transparent"
+                               VerticalAlignment="Center"></TextBlock>
+                    <TextBlock Text="{StaticResource GlyphPrint}" FontFamily="{StaticResource TelerikWebUI}"
+                               FontSize="32" Foreground="{Binding DataInputDone, Converter={StaticResource BoolToForegroundConverter}}" Background="Transparent"
+                               VerticalAlignment="Center"></TextBlock>
+                </StackPanel>
+            </Button>
+        </DockPanel>
+
+        <TabControl Grid.Row="1" DataContext="{Binding CashFlowInformation, Mode=TwoWay}">
+            <TabControl.Resources>
+                <Style TargetType="TabItem">
+
+                    <Setter Property="Template">
+                        <Setter.Value>
+                            <ControlTemplate TargetType="TabItem">
+                                <Grid Name="Panel">
+                                    <ContentPresenter x:Name="ContentSite"
+                                        VerticalAlignment="Center"
+                                        HorizontalAlignment="Center"
+                                        ContentSource="Header"
+                                        Margin="10,2"/>
+                                </Grid>
+                                <ControlTemplate.Triggers>
+                                    <Trigger Property="IsSelected" Value="True">
+                                        <Setter TargetName="Panel" Property="Background" Value="{telerik:MaterialResource ResourceKey=ComplementaryBrush}" />
+                                    </Trigger>
+                                    <Trigger Property="IsSelected" Value="False">
+                                        <Setter TargetName="Panel" Property="Background" Value="{telerik:MaterialResource ResourceKey=PrimaryBrush}" />
+
+                                    </Trigger>
+                                </ControlTemplate.Triggers>
+                            </ControlTemplate>
+                        </Setter.Value>
+                    </Setter>
+                </Style>
+                <Style TargetType="telerik:DataFormDataField">
+                    <Setter Property="LabelPosition" Value="Beside"/>
+                    <Setter Property="Margin" Value="0 0 0 10"/>
+                    <Setter Property="Width" Value="800"/>
+
+
+                </Style>
+                <Style TargetType="telerik:DataFormComboBoxField">
+                    <Setter Property="LabelPosition" Value="Beside"/>
+                    <Setter Property="Margin" Value="0 0 0 10"/>
+                    <Setter Property="Width" Value="800"/>
+
+                </Style>
+                <Style TargetType="telerik:DataFormDateField">
+                    <Setter Property="LabelPosition" Value="Beside"/>
+                    <Setter Property="Margin" Value="0 0 0 10"/>
+                    <Setter Property="Width" Value="800"/>
+
+                </Style>
+                <Style TargetType="telerik:DataFormCheckBoxField">
+                    <Setter Property="Margin" Value="0 0 0 10"/>
+                    <Setter Property="Width" Value="800"/>
+
+                </Style>
+                <Style TargetType="telerikHelper:DataFormTextBoxMultilineField">
+                    <Setter Property="LabelPosition" Value="Beside"/>
+                    <Setter Property="Margin" Value="0 0 0 10"/>
+                    <Setter Property="Width" Value="800"/>
+
+
+                </Style>
+            </TabControl.Resources>
+            <TabItem Header="Kapitalabruf">
+                <Border Margin="10 20 0 0">
+                    <ScrollViewer>
+                        <StackPanel>
+                            <telerik:DataFormDateField Label="Valuta" DataMemberBinding="{Binding EffectiveDate}"></telerik:DataFormDateField>
+                            <telerik:DataFormDataField Label="Kapitalabruf" DataMemberBinding="{Binding DetailSummary.CashFlowAmountCall, StringFormat=n2}"/>
+                            <telerik:DataFormDataField Label="Ausgleichszins" DataMemberBinding="{Binding DetailSummary.LookbackInterests, StringFormat=n2}"
+                                                       ToolTip="Der Ausgleichszins wird bezahlt; er wird nicht auf die Kapitalzusage angerechnet"/>
+                            <telerik:DataFormDataField Label="Kosten der Struktur" DataMemberBinding="{Binding DetailSummary.PartnershipExpenses, StringFormat=n2}"
+                                                       ToolTip="Die Kosten werden nicht auf die Kapitalzusage angerechnet"/>
+                            <telerik:DataFormDataField Label="Offene Zahlungen" DataMemberBinding="{Binding DetailSummary.OpenPayments, StringFormat=N2}"
+                                                        ToolTip="Der Betrag wird nicht auf die Kapitalzusage angerechnet, sondern nur im Anschreiben benutzt"/>
+                        </StackPanel>
+                    </ScrollViewer>
+                </Border>
+
+            </TabItem>
+            <TabItem Header="Ausschüttung">
+                <Border Margin="10 20 0 0">
+                    <ScrollViewer>
+                        <StackPanel>
+                            <telerik:DataFormDateField Label="Valuta" DataMemberBinding="{Binding EffectiveDate}"></telerik:DataFormDateField>
+                            <telerik:DataFormDataField Label="Ausschüttung" DataMemberBinding="{Binding DetailSummary.CashFlowAmountDistribution, StringFormat=n2}"/>
+                            <telerik:DataFormDataField Label="Kapital-Rückzahlung" DataMemberBinding="{Binding DetailSummary.ReturnOfCapital, StringFormat=N2}"/>
+                            <telerik:DataFormDataField Label="Beteiligungsgewinne" DataMemberBinding="{Binding DetailSummary.CapitalGain, StringFormat=n2}"/>
+                            <telerik:DataFormDataField Label="Dividenden- bzw. Zinserträge" DataMemberBinding="{Binding DetailSummary.Dividends, StringFormat=N2}"/>
+                            <telerik:DataFormDataField Label="Quellensteuer" DataMemberBinding="{Binding DetailSummary.WithholdingTax, StringFormat=N2}"/>
+                            <telerik:DataFormDataField Label="wieder abrufbare Ausschüttung" DataMemberBinding="{Binding DetailSummary.RecallableAmount, StringFormat=N2}"/>
+                            <telerik:DataFormDataField Label="Ausgleichszins" DataMemberBinding="{Binding DetailSummary.LookbackInterests, StringFormat=n2}"
+                                                       ToolTip="Der Ausgleichszins wird vereinnahmt; er wird nicht auf die Ausschüttungen angerechnet"/>
+                            <telerik:DataFormDataField Label="Kosten der Struktur" DataMemberBinding="{Binding DetailSummary.PartnershipExpenses, StringFormat=n2}"
+                                                       ToolTip="Dieser Betrag wird von der Ausschüttung abgezogen"/>
+                            <telerik:DataFormDataField Label="Offene Zahlungen" DataMemberBinding="{Binding DetailSummary.OpenPayments, StringFormat=N2}"
+                                                        ToolTip="Der Betrag wird nicht auf die Kapitalzusage angerechnet, sondern nur im Anschreiben benutzt"/>
+                        </StackPanel>
+                    </ScrollViewer>
+                </Border>
+            </TabItem>
+            <TabItem Header="Texte">
+                <Border Margin="10 20 0 0">
+                    <ScrollViewer>
+                        <StackPanel>
+                            <telerik:DataFormDataField Label="Cash Flow Typ" DataMemberBinding="{Binding CashFlowType}" IsReadOnly="true"/>
+                            <telerik:DataFormDateField Label="Datum des Anschreibens" DataMemberBinding="{Binding LetterDate, StringFormat=d}"/>
+                            <telerik:DataFormComboBoxField Label="Word-Vorlage" DataMemberBinding="{Binding WordDocument}"
+                                                           ItemsSource="{Binding RelativeSource={RelativeSource AncestorType={x:Type UserControl}}, Path=DataContext.Templates}">
+
+                            </telerik:DataFormComboBoxField>
+                            <telerikHelper:DataFormTextBoxMultilineField Label="Beschreibung" DataMemberBinding="{Binding CashFlowDescription}"/>
+                            <telerikHelper:DataFormTextBoxMultilineField Label="Brief Text oben"
+                                                                         DataMemberBinding="{Binding ComponentText}"/>
+                            <telerikHelper:DataFormTextBoxMultilineField Label="Brief Text unten"
+                                                                         DataMemberBinding="{Binding ComponentText2}"/>
+                        </StackPanel>
+                    </ScrollViewer>
+                </Border>
+            </TabItem>
+        </TabControl>
+
+        <StackPanel Grid.Row="2" Orientation="Horizontal">
+            <StackPanel.Resources>
+                <Style TargetType="TextBlock">
+                    <Setter Property="Padding" Value="5 0 5 0"/>
+                    <Setter Property="FontSize" Value="{telerik:MaterialResource ResourceKey=FontSizeL}"/>
+                    <Setter Property="VerticalAlignment" Value="Center"/>
+                </Style>
+            </StackPanel.Resources>
+            <TextBlock Text="Brutto-Ausschüttung"></TextBlock>
+            <TextBlock Text="{Binding CashFlowInformation.DetailSummary.CashFlowAmount, StringFormat= n2}"/>
+            <TextBlock Text="Netto-Ausschüttung" />
+            <TextBlock Text="{Binding NetDistribution, StringFormat= n2}"/>
+            <TextBlock Text="Differenz" Background="{Binding DistributionDifference, Converter={StaticResource BackgroundConverter}}"
+                       Foreground="{Binding DistributionDifference, Converter={StaticResource ForegroundConverter}}"/>
+            <TextBlock Text="{Binding DistributionDifference, StringFormat= N2}" Background="{Binding DistributionDifference, Converter={StaticResource BackgroundConverter}}"
+                       Foreground="{Binding DistributionDifference, Converter={StaticResource ForegroundConverter}}"/>
+        </StackPanel>
+
+    </Grid>
+</UserControl>

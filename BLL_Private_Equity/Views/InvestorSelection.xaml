@@ -1,0 +1,72 @@
+﻿<UserControl x:Class="BLL_Private_Equity.Views.InvestorSelection"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:prism="http://prismlibrary.com/"
+             prism:ViewModelLocator.AutoWireViewModel="true"     
+             xmlns:telerik="http://schemas.telerik.com/2008/xaml/presentation"            
+             mc:Ignorable="d" 
+            >
+    <telerik:EventToCommandBehavior.EventBindings>
+        <telerik:EventBinding EventName="Loaded" Command="{Binding LoadedCommand}"></telerik:EventBinding>
+    </telerik:EventToCommandBehavior.EventBindings>
+    <UserControl.Resources>
+        <DataTemplate x:Key="InvestorTemplate">
+            <Grid Margin="0 3">
+                <Grid.RowDefinitions>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions >
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                </Grid.ColumnDefinitions>
+                <TextBlock Grid.Row="0" Grid.Column="0"
+                           Text="{Binding InvestorHqTrustAccount}"
+                           FontSize="{telerik:MaterialResource ResourceKey=FontSizeS}"/>
+                <TextBlock Grid.Row="0" Grid.Column="1"
+                           Text="{Binding Advisor.FullName}"
+                           FontSize="{telerik:MaterialResource ResourceKey=FontSizeS}"/>
+                <TextBlock Grid.Row="1" Grid.Column="0"
+                           Text="{Binding IName.FullName}"
+                           FontSize="{telerik:MaterialResource ResourceKey=FontSizeS}"/>
+                <TextBlock Grid.Row="1" Grid.Column="1"
+                           Text="{Binding InvestorReference}"
+                           FontSize="{telerik:MaterialResource ResourceKey=FontSizeS}"/>
+            </Grid>
+        </DataTemplate>
+    </UserControl.Resources>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <DockPanel LastChildFill="False">
+            <telerik:RadWatermarkTextBox WatermarkContent="Suchbegriff" Text="{Binding FilterText}"></telerik:RadWatermarkTextBox>
+            <telerik:RadButton FontFamily="{StaticResource TelerikWebUI}" ToolTip="Filter löschen" Content="{StaticResource GlyphClose}"
+                               Command="{Binding DeleteFilterCommand}"/>
+            <telerik:RadButton FontFamily="{StaticResource TelerikWebUI}" ToolTip="Filtern" Content="{StaticResource GlyphZoom}"
+                               DockPanel.Dock="Right"
+                               Command="{Binding FilterCommand}"/>
+        </DockPanel>
+
+        <telerik:RadBusyIndicator IsBusy="{Binding InvestorsLoading}" Grid.Row="1"
+                             BusyContent="Investoren Informationen werden geladen ...">
+            <Grid>
+                <telerik:RadListBox x:Name="InvestorListBox"
+                    ItemsSource="{Binding InvestorList}"
+                            ItemTemplate="{StaticResource InvestorTemplate}"
+                                    SelectedItem="{Binding SelectedInvestor,Mode=TwoWay}">
+                    <telerik:EventToCommandBehavior.EventBindings>
+                        <telerik:EventBinding EventName="SelectionChanged" Command="{Binding InvestorSelectedCommand}">
+                        </telerik:EventBinding>
+                    </telerik:EventToCommandBehavior.EventBindings>
+                </telerik:RadListBox>
+
+            </Grid>
+        </telerik:RadBusyIndicator>
+
+    </Grid>
+</UserControl>
+

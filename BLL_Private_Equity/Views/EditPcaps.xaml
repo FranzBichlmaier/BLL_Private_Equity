@@ -1,0 +1,84 @@
+﻿<UserControl x:Class="BLL_Private_Equity.Views.EditPcaps"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:prism="http://prismlibrary.com/"
+             prism:ViewModelLocator.AutoWireViewModel="True"
+             xmlns:telerik="http://schemas.telerik.com/2008/xaml/presentation"
+             xmlns:converter="clr-namespace:BLL_Private_Equity.Converter"
+             xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
+             mc:Ignorable="d" 
+             >
+    <i:Interaction.Triggers>
+        <prism:InteractionRequestTrigger SourceObject="{Binding NotificationRequest}">
+            <prism:PopupWindowAction IsModal="True" CenterOverAssociatedObject="True"/>
+        </prism:InteractionRequestTrigger>
+        <prism:InteractionRequestTrigger SourceObject="{Binding ConfirmationRequest}">
+            <prism:PopupWindowAction IsModal="True" CenterOverAssociatedObject="True"/>
+        </prism:InteractionRequestTrigger>
+    </i:Interaction.Triggers>
+    <UserControl.Resources>
+        <converter:DifferenceToVisibilityConverter x:Key="DifferenceToVisibilityConverter"/>
+        <telerik:BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter"/>
+    </UserControl.Resources>
+    <Grid >
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <!--  Row 1 contains Fundname and Combobox for Quarterselection -->
+        <StackPanel Margin="6">
+            <StackPanel Orientation="Horizontal">
+                <TextBlock Text="{Binding Fund.FundName, FallbackValue=FundName}" FontSize="20" FontWeight="Bold" Margin="20 6 0 6" VerticalAlignment="Center"
+                           MinWidth="270"/>
+
+                <telerik:RadComboBox ItemsSource="{Binding Quarters}" FontSize="20" FontWeight="Bold" Margin="10 6 0 6" MinWidth="100"
+                                     IsSynchronizedWithCurrentItem="true"/>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal">
+                <TextBlock Margin="20 6 0 6" Text="Bewertung (Gesamtbetrag)" FontSize="20" FontWeight="Bold" Width="270"/>
+                <TextBox Text="{Binding NewPcap, Mode=TwoWay, StringFormat=n2}"
+                         FontSize="20" FontWeight="Bold" Margin="10 6 0 6" Width="150" TextAlignment="Right">
+                    <telerik:EventToCommandBehavior.EventBindings>
+                        <telerik:EventBinding EventName="TextChanged" Command="{Binding OnValuationChangedCommand}"/>
+                    </telerik:EventToCommandBehavior.EventBindings>
+                </TextBox>
+                <StackPanel Orientation="Horizontal" Visibility="{Binding PcapDifference,
+                    Mode=TwoWay,
+                    Converter={StaticResource DifferenceToVisibilityConverter}}">
+                    <TextBlock Text="Differenz:" Foreground="{telerik:MaterialResource ResourceKey=ValidationBrush}" FontSize="20" FontWeight="Bold"
+                               Margin="20 6 0 6"/>
+                    <TextBlock Text="{Binding PcapDifference, StringFormat=n2}" Foreground="{telerik:MaterialResource ResourceKey=ValidationBrush}" FontSize="20" FontWeight="Bold"
+                               Margin="20 6 0 6"/>
+                </StackPanel>
+                <TextBlock Text="Es sind berechnete NAVs enthalten." Foreground="{telerik:MaterialResource ResourceKey=ValidationBrush}" FontSize="20" FontWeight="Bold"
+                               Margin="20 6 0 6" Visibility="{Binding ContainsCalculatedItems, Converter={StaticResource BooleanToVisibilityConverter}}"
+                           ToolTip="Speichern der Daten bedeutet, dass die errechneten Werte in der Datenbank gespeichert werden. Sie müssten im Verlauf manuell geändert werden. Werden die Daten nicht gespeichert, werden sie immer neu errechnet."/>
+            </StackPanel>
+        </StackPanel>
+
+        <!-- Row 2 contains a GridView with the individual Pcaps -->
+
+        <telerik:RadGridView Grid.Row="1" Margin="12"
+            ItemsSource="{Binding Pcaps, Mode=TwoWay}"
+                             ShowGroupPanel="False"
+                             CanUserInsertRows="False"
+                             CanUserDeleteRows="False"
+                             AutoGenerateColumns="False">
+            <telerik:EventToCommandBehavior.EventBindings>
+                <telerik:EventBinding EventName="RowEditEnded" Command="{Binding RowEditEndedCommand}"/>
+            </telerik:EventToCommandBehavior.EventBindings>
+            <telerik:RadGridView.Columns>
+                <telerik:GridViewDataColumn Header="Investor" DataMemberBinding="{Binding CompanyName}" IsReadOnly="true"/>
+                <telerik:GridViewDataColumn Header="Investor Referenz" DataMemberBinding="{Binding InvestorReference}" IsReadOnly="true"/>
+                <telerik:GridViewDataColumn Header="Commitment" DataMemberBinding="{Binding CommitmentAmount, StringFormat=N0}" IsReadOnly="true"
+                                            TextAlignment="Right"/>
+                <telerik:GridViewDataColumn Header="NAV" DataMemberBinding="{Binding FinalPcapAmount, StringFormat=n2}" IsReadOnly="false"
+                                            TextAlignment="Right"/>
+                <telerik:GridViewCheckBoxColumn Header="wurde errechnet" DataMemberBinding="{Binding IsCalculated}"/>
+            </telerik:RadGridView.Columns>
+        </telerik:RadGridView>
+    </Grid>
+</UserControl>

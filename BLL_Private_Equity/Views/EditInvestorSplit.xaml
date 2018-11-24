@@ -1,0 +1,197 @@
+﻿<UserControl x:Class="BLL_Private_Equity.Views.EditInvestorSplit"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+            xmlns:prism="http://prismlibrary.com/"
+             prism:ViewModelLocator.AutoWireViewModel="True"
+             xmlns:telerik="http://schemas.telerik.com/2008/xaml/presentation"
+             xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
+             xmlns:converter="clr-namespace:BLL_Private_Equity.Converter"
+             xmlns:xceed="http://schemas.xceed.com/wpf/xaml/toolkit"            
+             mc:Ignorable="d" 
+            >
+    <i:Interaction.Triggers>
+        <prism:InteractionRequestTrigger SourceObject="{Binding NotificationRequest}">
+            <prism:PopupWindowAction IsModal="True" CenterOverAssociatedObject="True"></prism:PopupWindowAction>
+        </prism:InteractionRequestTrigger>
+        <prism:InteractionRequestTrigger SourceObject="{Binding ConfirmationRequest}">
+            <prism:PopupWindowAction IsModal="True" CenterOverAssociatedObject="True"></prism:PopupWindowAction>
+        </prism:InteractionRequestTrigger>
+    </i:Interaction.Triggers>
+    <UserControl.Resources>
+        <converter:DifferenceToForegroundConverter x:Key="ForegroundConverter"/>
+        <converter:DifferenceToBackgroundConverter x:Key="BackgroundConverter"/>
+        <converter:DifferenceToVisibilityConverter x:Key="VisibilityConverter"/>
+        <converter:AmountToBooleanConverter x:Key="AmountToReadOnlyConverter"/>
+    </UserControl.Resources>
+    <Grid >
+        <Grid.RowDefinitions>
+            <RowDefinition Height="50"></RowDefinition>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="50"/>
+        </Grid.RowDefinitions>
+
+        <xceed:ChildWindow Grid.Row="0" Grid.RowSpan="3" WindowState="{Binding ShowInvestorCommitments, Mode=TwoWay}"
+                           CloseButtonVisibility="Collapsed" Caption="Auswahl der Beteiligung" >
+            <Border>
+                <StackPanel Margin="10">
+                    <TextBlock Text="Bitte wählen Sie eine Beteiligung aus, die diesem Cashflow zugeordnet wird:"></TextBlock>
+                    <telerik:RadListBox Margin="0 20 0 0" ItemsSource="{Binding NewInvestorCommitments}"
+                                        DisplayMemberPath="PeFund.FundName"
+                                        IsSynchronizedWithCurrentItem="True"
+                                        SelectionMode="Single"></telerik:RadListBox>
+                    <DockPanel LastChildFill="False" Margin="0 20 0 0">
+                        <Button DockPanel.Dock="Right" VerticalAlignment="Center" Margin="0 0 20 0"
+                    Background="{telerik:MaterialResource ResourceKey=PrimaryNormalBrush}"
+                    Command="{Binding SelectInvestorCommitmentCommand}">
+                            <StackPanel Orientation="Horizontal">
+                                <TextBlock Text="Auswahl übernehmen" Margin="0 0 15 0" FontSize="20"
+                               Padding="15 0 0 0"
+                               Foreground="{telerik:MaterialResource ResourceKey=PrimaryBrush}" Background="Transparent"
+                               VerticalAlignment="Center"></TextBlock>
+                            </StackPanel>
+                        </Button>
+                    </DockPanel>
+                </StackPanel>
+            </Border>
+        </xceed:ChildWindow>
+
+        <!--  Anzeige von Recalculate button, Fund mit Commmitment und weiter button -->
+        <DockPanel Grid.Row="0" LastChildFill="False">
+            <Button DockPanel.Dock="Right" Margin="0 0 20 0" VerticalAlignment="Center"
+                    Background="{telerik:MaterialResource ResourceKey=PrimaryNormalBrush}"
+                    Command="{Binding GotoNextStepCommand}">
+                <StackPanel Orientation="Horizontal">
+                    <TextBlock Text="weiter" Margin="0 0 15 0" FontSize="20"
+                               Padding="15 0 0 0"
+                               Foreground="{telerik:MaterialResource ResourceKey=PrimaryBrush}" Background="Transparent"
+                               VerticalAlignment="Center"></TextBlock>
+                    <TextBlock Text="{StaticResource GlyphArrowChevronRight}" FontFamily="{StaticResource TelerikWebUI}"
+                               FontSize="32" Foreground="{telerik:MaterialResource ResourceKey=PrimaryBrush}" Background="Transparent"
+                               VerticalAlignment="Center"></TextBlock>
+                </StackPanel>
+            </Button>
+            <Button DockPanel.Dock="Left" Margin="20 0 0 0" VerticalAlignment="Center"
+                    Background="{telerik:MaterialResource ResourceKey=PrimaryNormalBrush}"
+                    Foreground="{telerik:MaterialResource ResourceKey=PrimaryBrush}"
+                    FontSize="32" Content="{StaticResource GlyphReloadSmall}" FontFamily="{StaticResource TelerikWebUI}"
+                    ToolTip="Aufteilung mit aktuellen Commitments neu berechnen"
+                    Command="{Binding ReCalculateCommand}"/>
+
+            <TextBlock DockPanel.Dock="Left" Margin="20 0 0 0" VerticalAlignment="Center" FontSize="20" FontWeight="Bold"
+                       Text="{Binding FundHeader}"/>
+
+        </DockPanel>
+        <telerik:RadGridView Grid.Row="1" x:Name="GridViewDetails"
+                             ItemsSource="{Binding CashFlowInformation.InvestorDetails, Mode=TwoWay}"     
+                             SelectedItem="{Binding SelectedItem, Mode=TwoWay}"
+                             NewRowPosition="None"
+                             AutoGenerateColumns="False"
+                             ShowGroupPanel="False"
+                             CanUserInsertRows="True"
+                             CanUserDeleteRows="False"
+                             SelectionUnit="Cell"
+                             LeftFrozenColumnCount="2"
+                             RowIndicatorVisibility="Collapsed">
+
+            <telerik:RadGridView.Columns>
+                <telerik:GridViewComboBoxColumn Header="Investor" DataMemberBinding="{Binding InvestorId}" 
+                                                UniqueName="InvestorColumn"
+                                                IsReadOnly="{Binding SelectedItem.CommitmentAmount, Converter={StaticResource AmountToReadOnlyConverter}}"
+                                                DisplayMemberPath="IName.FullName"
+                                                SelectedValueMemberPath="Id"
+                                                ItemsSource="{Binding Investors}"></telerik:GridViewComboBoxColumn>
+                <telerik:GridViewDataColumn Header="Referenz" DataMemberBinding="{Binding Reference}"/>
+                <telerik:GridViewDataColumn Header="Commitment" DataMemberBinding="{Binding CommitmentAmount, StringFormat=N0}" TextAlignment="Right"></telerik:GridViewDataColumn>
+                <telerik:GridViewDataColumn Header="Abruf-Betrag" DataMemberBinding="{Binding CashFlowAmountCall, StringFormat=n2}" TextAlignment="Right" IsVisible="{Binding IsCapitalCall}"></telerik:GridViewDataColumn>
+                <telerik:GridViewDataColumn Header="Ausschüttung" DataMemberBinding="{Binding CashFlowAmountDistribution, StringFormat=n2}" TextAlignment="Right" IsVisible="{Binding IsDistribution}"></telerik:GridViewDataColumn>
+                <telerik:GridViewDataColumn Header="Rückzahlung Kapital" DataMemberBinding="{Binding ReturnOfCapital, StringFormat=n2}" TextAlignment="Right" IsVisible="{Binding IsDistribution}"></telerik:GridViewDataColumn>
+                <telerik:GridViewDataColumn Header="Beteiligungserträge" DataMemberBinding="{Binding CapitalGain, StringFormat=n2}" TextAlignment="Right" IsVisible="{Binding IsDistribution}"></telerik:GridViewDataColumn>
+                <telerik:GridViewDataColumn Header="Dividendden / Zinsen" DataMemberBinding="{Binding Dividends, StringFormat=n2}" TextAlignment="Right" IsVisible="{Binding IsDistribution}"></telerik:GridViewDataColumn>
+                <telerik:GridViewDataColumn Header="Quellensteuer" DataMemberBinding="{Binding WithholdingTax, StringFormat=n2}" TextAlignment="Right" IsVisible="{Binding IsDistribution}"></telerik:GridViewDataColumn>
+                <telerik:GridViewDataColumn Header="wieder abrufbar" DataMemberBinding="{Binding RecallableAmount, StringFormat=n2}" TextAlignment="Right" IsVisible="{Binding IsDistribution}"></telerik:GridViewDataColumn>
+                <telerik:GridViewDataColumn Header="Kosten der Struktur" DataMemberBinding="{Binding PartnershipExpenses, StringFormat= n2}" TextAlignment="Right"></telerik:GridViewDataColumn>
+                <telerik:GridViewDataColumn Header="Ausgleichszinsen" DataMemberBinding="{Binding LookbackInterests, StringFormat=n2}" TextAlignment="Right"></telerik:GridViewDataColumn>
+                <telerik:GridViewDataColumn Header="offene Zahlungen" DataMemberBinding="{Binding OpenPayments, StringFormat=n2}" TextAlignment="Right"></telerik:GridViewDataColumn>
+                <telerik:GridViewDataColumn Header="offenes Commitemnt" DataMemberBinding="{Binding OpenCommitment, StringFormat=N2}" TextAlignment="Center"></telerik:GridViewDataColumn>
+            </telerik:RadGridView.Columns>
+            <telerik:EventToCommandBehavior.EventBindings>
+                <telerik:EventBinding EventName="SelectedCellsChanged" Command="{Binding SelectedCellsChangedCommand}" PassEventArgsToCommand="True"/>
+                <telerik:EventBinding EventName="CellEditEnded" Command="{Binding CellEditEndedCommand}"></telerik:EventBinding>
+                <telerik:EventBinding EventName="AddingNewDataItem" Command="{Binding NewInvestorAddedCommand}"/>
+                <telerik:EventBinding EventName="RowValidating" Command="{Binding RowValidatingCommand}" PassEventArgsToCommand="True"/>
+            </telerik:EventToCommandBehavior.EventBindings>
+
+        </telerik:RadGridView>
+
+        <StackPanel Grid.Row="2" Orientation="Horizontal">
+            <TextBlock VerticalAlignment="Center" Text="Differenzen zwischen Gesamtbetrag und Einzelbetrag" Margin="20 0 10 0"></TextBlock>
+            <StackPanel Orientation="Horizontal" Background="{Binding DifferenceCapitalCall, Converter={StaticResource BackgroundConverter}}" Margin="0 5 0 5"
+                        Visibility="{Binding DifferenceCapitalCall, Converter={StaticResource VisibilityConverter}}">
+                <TextBlock Text="Abrufbetrag" VerticalAlignment="Center" Margin="5 0 10 0" Background="Transparent"
+                           Foreground="{Binding DifferenceCapitalCall, Converter={StaticResource ForegroundConverter}}"></TextBlock>
+                <TextBlock VerticalAlignment="Center" Text="{Binding DifferenceCapitalCall, StringFormat= n2}"  Background="Transparent"
+                       Foreground="{Binding DifferenceCapitalCall, Converter={StaticResource ForegroundConverter}}" Margin="0 0 5 0"></TextBlock>
+            </StackPanel>
+
+            <StackPanel Orientation="Horizontal" Background="{Binding DifferenceExpenses, Converter={StaticResource BackgroundConverter}}" Margin="20 5 0 5"
+                         Visibility="{Binding DifferenceExpenses, Converter={StaticResource VisibilityConverter}}">
+                <TextBlock Text="Kosten der Struktur" VerticalAlignment="Center" Margin="5 0 10 0" Background="Transparent"
+                           Foreground="{Binding DifferenceExpenses, Converter={StaticResource ForegroundConverter}}"></TextBlock>
+                <TextBlock VerticalAlignment="Center" Text="{Binding DifferenceExpenses, StringFormat= n2}"  Background="Transparent"
+                       Foreground="{Binding DifferenceExpenses, Converter={StaticResource ForegroundConverter}}" Margin="0 0 5 0"></TextBlock>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal" Background="{Binding DifferenceLookback, Converter={StaticResource BackgroundConverter}}" Margin="20 5 0 5"
+                         Visibility="{Binding DifferenceLookback, Converter={StaticResource VisibilityConverter}}">
+                <TextBlock Text="Ausgleichszinsen" VerticalAlignment="Center" Margin="5 0 10 0" Background="Transparent"
+                           Foreground="{Binding DifferenceLookback, Converter={StaticResource ForegroundConverter}}"></TextBlock>
+                <TextBlock VerticalAlignment="Center" Text="{Binding DifferenceLookback, StringFormat= n2}"  Background="Transparent"
+                       Foreground="{Binding DifferenceLookback, Converter={StaticResource ForegroundConverter}}" Margin="0 0 5 0"></TextBlock>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal" Background="{Binding DifferenceDistribution, Converter={StaticResource BackgroundConverter}}" Margin="20 5 0 5"
+                         Visibility="{Binding DifferenceDistribution, Converter={StaticResource VisibilityConverter}}">
+                <TextBlock Text="Ausschüttungsbetrag" VerticalAlignment="Center" Margin="5 0 10 0" Background="Transparent"
+                           Foreground="{Binding DifferenceDistribution, Converter={StaticResource ForegroundConverter}}"></TextBlock>
+                <TextBlock VerticalAlignment="Center" Text="{Binding DifferenceDistribution, StringFormat= n2}"  Background="Transparent"
+                       Foreground="{Binding DifferenceDistribution, Converter={StaticResource ForegroundConverter}}" Margin="0 0 5 0"></TextBlock>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal" Background="{Binding DifferenceReturnOfCapital, Converter={StaticResource BackgroundConverter}}" Margin="20 5 0 5"
+                         Visibility="{Binding DifferenceReturnOfCapital, Converter={StaticResource VisibilityConverter}}">
+                <TextBlock Text="Kapital-Rückzahlung" VerticalAlignment="Center" Margin="5 0 10 0" Background="Transparent"
+                           Foreground="{Binding DifferenceReturnOfCapital, Converter={StaticResource ForegroundConverter}}"></TextBlock>
+                <TextBlock VerticalAlignment="Center" Text="{Binding DifferenceReturnOfCapital, StringFormat= n2}"  Background="Transparent"
+                       Foreground="{Binding DifferenceReturnOfCapital, Converter={StaticResource ForegroundConverter}}" Margin="0 0 5 0"></TextBlock>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal" Background="{Binding DifferenceCapitalGain, Converter={StaticResource BackgroundConverter}}" Margin="20 5 0 5"
+                         Visibility="{Binding DifferenceCapitalGain, Converter={StaticResource VisibilityConverter}}">
+                <TextBlock Text="Beteiligungsgewinne" VerticalAlignment="Center" Margin="5 0 10 0" Background="Transparent"
+                           Foreground="{Binding DifferenceCapitalGain, Converter={StaticResource ForegroundConverter}}"></TextBlock>
+                <TextBlock VerticalAlignment="Center" Text="{Binding DifferenceCapitalGain, StringFormat= n2}"  Background="Transparent"
+                       Foreground="{Binding DifferenceCapitalGain, Converter={StaticResource ForegroundConverter}}" Margin="0 0 5 0"></TextBlock>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal" Background="{Binding DifferenceDividends, Converter={StaticResource BackgroundConverter}}" Margin="20 5 0 5"
+                         Visibility="{Binding DifferenceDividends, Converter={StaticResource VisibilityConverter}}">
+                <TextBlock Text="Dividenden" VerticalAlignment="Center" Margin="5 0 10 0" Background="Transparent"
+                           Foreground="{Binding DifferenceDividends, Converter={StaticResource ForegroundConverter}}"></TextBlock>
+                <TextBlock VerticalAlignment="Center" Text="{Binding DifferenceDividends, StringFormat= n2}"  Background="Transparent"
+                       Foreground="{Binding DifferenceDividends, Converter={StaticResource ForegroundConverter}}" Margin="0 0 5 0"></TextBlock>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal" Background="{Binding DifferenceRecallable, Converter={StaticResource BackgroundConverter}}" Margin="20 5 0 5"
+                         Visibility="{Binding DifferenceRecallable, Converter={StaticResource VisibilityConverter}}">
+                <TextBlock Text="wieder abrufbar" VerticalAlignment="Center" Margin="5 0 10 0" Background="Transparent"
+                           Foreground="{Binding DifferenceRecallable, Converter={StaticResource ForegroundConverter}}"></TextBlock>
+                <TextBlock VerticalAlignment="Center" Text="{Binding DifferenceRecallable, StringFormat= n2}"  Background="Transparent"
+                       Foreground="{Binding DifferenceRecallable, Converter={StaticResource ForegroundConverter}}" Margin="0 0 5 0"></TextBlock>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal" Background="{Binding DifferenceWithholdingTax, Converter={StaticResource BackgroundConverter}}" Margin="20 5 0 5"
+                         Visibility="{Binding DifferenceWithholdingTax, Converter={StaticResource VisibilityConverter}}">
+                <TextBlock Text="Quellensteuer" VerticalAlignment="Center" Margin="5 0 10 0" Background="Transparent"
+                           Foreground="{Binding DifferenceWithholdingTax, Converter={StaticResource ForegroundConverter}}"></TextBlock>
+                <TextBlock VerticalAlignment="Center" Text="{Binding DifferenceWithholdingTax, StringFormat= n2}"  Background="Transparent"
+                       Foreground="{Binding DifferenceWithholdingTax, Converter={StaticResource ForegroundConverter}}" Margin="0 0 5 0"></TextBlock>
+            </StackPanel>
+        </StackPanel>
+
+    </Grid>
+</UserControl>

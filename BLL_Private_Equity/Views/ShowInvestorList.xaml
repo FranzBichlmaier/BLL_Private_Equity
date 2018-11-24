@@ -1,0 +1,40 @@
+﻿<UserControl x:Class="BLL_Private_Equity.Views.ShowInvestorList"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:prism="http://prismlibrary.com/"
+             prism:ViewModelLocator.AutoWireViewModel="True"
+             xmlns:telerik="http://schemas.telerik.com/2008/xaml/presentation"
+             xmlns:converter="clr-namespace:BLL_Private_Equity.Converter"            
+             mc:Ignorable="d">
+    <telerik:EventToCommandBehavior.EventBindings>
+        <telerik:EventBinding EventName="Loaded" Command="{Binding LoadedCommand}"/>
+    </telerik:EventToCommandBehavior.EventBindings>
+    <UserControl.Resources>
+        <converter:InvestorGroupConverter x:Key="InvestorGroupConverter"/>
+    </UserControl.Resources>
+    <Grid Margin="10">
+        <telerik:RadGridView ItemsSource="{Binding InvestorList}"
+                             AutoGenerateColumns="False"
+                             CanUserInsertRows="False"
+                             CanUserDeleteRows="False"
+                             RowIndicatorVisibility="Collapsed">
+            <telerik:EventToCommandBehavior.EventBindings>
+                <telerik:EventBinding EventName="MouseDoubleClick" Command="{Binding ShowInvestorDetailsCommand}"/>
+            </telerik:EventToCommandBehavior.EventBindings>
+            <telerik:RadGridView.Columns>
+               
+                <telerik:GridViewDataColumn Header="Referenz" DataMemberBinding="{Binding InvestorReference}"/>
+                <telerik:GridViewDataColumn Header="Name" DataMemberBinding="{Binding IName.FullName}" IsReadOnly="True"/>
+                <telerik:GridViewDataColumn Header="wird betreut von" DataMemberBinding="{Binding Advisor.FullName}"/>
+                <telerik:GridViewDataColumn Header="Ansprechpartner" DataMemberBinding="{Binding ClientAdvisor.DisplayName}"/>
+                <telerik:GridViewComboBoxColumn Header="Kundengruppe" DataMemberBinding="{Binding Group, Converter={StaticResource InvestorGroupConverter}}"
+                                                ItemsSource="{Binding InvestorGroups}"
+                                                SelectedValueMemberPath="Value"
+                                                DisplayMemberPath="DisplayName"/>
+            </telerik:RadGridView.Columns>
+        </telerik:RadGridView>
+    </Grid>
+</UserControl>
+

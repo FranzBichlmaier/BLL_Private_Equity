@@ -1,0 +1,148 @@
+﻿<UserControl x:Class="BLL_Private_Equity.Views.ExportInvestorList"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+              xmlns:telerik="http://schemas.telerik.com/2008/xaml/presentation"
+             xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"             
+             xmlns:prism="http://prismlibrary.com/"
+             prism:ViewModelLocator.AutoWireViewModel="True"
+             mc:Ignorable="d" 
+             >
+    <i:Interaction.Triggers>
+        <prism:InteractionRequestTrigger SourceObject="{Binding NotificationRequest}">
+            <prism:PopupWindowAction IsModal="True" CenterOverAssociatedObject="True"></prism:PopupWindowAction>
+        </prism:InteractionRequestTrigger>
+    </i:Interaction.Triggers>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="80"></RowDefinition>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <DockPanel LastChildFill="False">
+
+            <telerik:RadButton Command="{Binding ReloadCommand}" VerticalAlignment="Center" Margin="10 0"
+                               DockPanel.Dock="Left" ToolTip="Investoren-Daten neu laden (nach Änderungen)">
+                <TextBlock FontFamily="{StaticResource TelerikWebUI}" Text="{StaticResource GlyphReload}"
+                           FontSize="32"
+                           ></TextBlock>
+            </telerik:RadButton>
+            <telerik:RadButton Command="{Binding EditInvestorCommand}" VerticalAlignment="Center" Margin="10 0"
+                               DockPanel.Dock="Left" ToolTip="Investor in einem neuen Tab anzeigen">
+                <TextBlock FontFamily="{StaticResource TelerikWebUI}" Text="{StaticResource GlyphEdit}"
+                           FontSize="32"
+                           ></TextBlock>
+            </telerik:RadButton>
+            <telerik:RadButton Command="{Binding ExportCommand}" VerticalAlignment="Center" Margin="10 0"
+                               DockPanel.Dock="Right" ToolTip="Alle Daten nach Excel exportieren">
+                <TextBlock FontFamily="{StaticResource TelerikWebUI}" Text="{StaticResource GlyphExcel}"
+                           FontSize="32"
+                           ></TextBlock>
+            </telerik:RadButton>
+            <telerik:RadButton Command="{Binding BrowseCommand}" Margin="10 0" DockPanel.Dock="Right" FontSize="32"
+                                    FontFamily="{StaticResource TelerikWebUI}" Content="{StaticResource GlyphFolderOpen}"
+                              ToolTip="Directory festlegen" VerticalAlignment="Center" HorizontalAlignment="Center">
+            </telerik:RadButton>
+            <Grid DockPanel.Dock="Right" Margin="0 0 20 0" VerticalAlignment="Center">
+                <Grid.RowDefinitions>
+                    <RowDefinition />
+                    <RowDefinition/>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="80"/>
+                    <ColumnDefinition Width="400"/>
+
+                </Grid.ColumnDefinitions>
+                <TextBlock Text="Directory:" HorizontalAlignment="Right" Margin="0 0 10 0" VerticalAlignment="Center"/>
+                <TextBlock Text="Datei-Name:" HorizontalAlignment="Right" Margin="0 0 10 0" VerticalAlignment="Center"
+                           Grid.Row="1"></TextBlock>
+                <TextBox Grid.Row="1" Grid.Column="1" Padding="10 0 10 0"
+                         Text="{Binding ExportFileName}"/>
+
+                <TextBox HorizontalAlignment="Left" Padding="10 0 10 0" 
+                             Grid.Column="1" 
+                             Text="{Binding ExportDirectoryName}"/>
+            </Grid>
+        </DockPanel>
+        <telerik:RadBusyIndicator IsBusy="{Binding DataLoading}" Grid.Row="1"
+                             BusyContent="Commitment Informationen werden geladen ...">
+            <telerik:RadGridView ItemsSource="{Binding Commitments}" x:Name="CommitmentGrid"
+                                 SelectedItem="{Binding SelectedCommitment, Mode=TwoWay}"
+                                 IsReadOnly="True"
+                             RowIndicatorVisibility="Collapsed"
+                             AutoGenerateColumns="False"                          
+                             ShowGroupPanel="False">
+                <telerik:EventToCommandBehavior.EventBindings>
+                    <telerik:EventBinding EventName="Loaded" Command="{Binding GridViewLoadedCommand}" PassEventArgsToCommand="True"/>
+                </telerik:EventToCommandBehavior.EventBindings>
+                <telerik:RadGridView.ColumnGroups>
+                    <telerik:GridViewColumnGroup  Name="InvestorInformation" Header="Investor Informationen" />
+                    <telerik:GridViewColumnGroup  Name="DirectorInformation" Header="Ansprechpartner" />                    
+                    <telerik:GridViewColumnGroup Name="TaxInformation" Header="Steuerberater und Steuernummern"/>
+                    <telerik:GridViewColumnGroup Name="Bankverbindung" Header="Bank-Konto und -Informationen"/>
+                </telerik:RadGridView.ColumnGroups>
+                <telerik:RadGridView.Columns>
+                    <telerik:GridViewDataColumn DataMemberBinding="{Binding PeFund.FundName}" Header="PE-Fonds"/>
+                    <telerik:GridViewDataColumn DataMemberBinding="{Binding CommitmentAmount, StringFormat=n0}" Header="Commitment"/>
+                    
+                    <telerik:GridViewDataColumn DataMemberBinding="{Binding Investor.InvestorReference}" Header="Referenz" ColumnGroupName="InvestorInformation"/>
+                    <telerik:GridViewDataColumn DataMemberBinding="{Binding Investor.IName.Title}" Header="Titel" ColumnGroupName="InvestorInformation"/>
+                    <telerik:GridViewDataColumn DataMemberBinding="{Binding Investor.IName.FirstName}" Header="Vorname" ColumnGroupName="InvestorInformation"/>
+                    <telerik:GridViewDataColumn DataMemberBinding="{Binding Investor.IName.LastName}" Header="Nachname" ColumnGroupName="InvestorInformation"/>
+                    <telerik:GridViewDataColumn DataMemberBinding="{Binding Investor.IName.AddressName}" Header="Investor Adress Anrede" ColumnGroupName="InvestorInformation"/>
+                    <telerik:GridViewDataColumn DataMemberBinding="{Binding Investor.IName.Salutation}" Header="Investor Anrede" ColumnGroupName="InvestorInformation"/>
+                    <telerik:GridViewDataColumn DataMemberBinding="{Binding Investor.IName.EmailAddress}" Header="Investor-Email" ColumnGroupName="InvestorInformation"/>
+                    <telerik:GridViewDataColumn DataMemberBinding="{Binding Investor.IName.TelephoneNumber}" Header="Investor Telefon" ColumnGroupName="InvestorInformation"/>
+                    <telerik:GridViewDataColumn DataMemberBinding="{Binding Investor.IName.FaxNumber}" Header="Investor Fax" ColumnGroupName="InvestorInformation"/>
+                    <telerik:GridViewDataColumn DataMemberBinding="{Binding Investor.FoundationBirthday}" Header="Gründung / Geburtstag"  ColumnGroupName="InvestorInformation"/>                   
+                    <telerik:GridViewDataColumn DataMemberBinding="{Binding Investor.ConfidentialLetter}" Header="Persönlich/Vertraulich"/>
+                    <telerik:GridViewDataColumn DataMemberBinding="{Binding Investor.SendForm}" Header="Überweisungsformular"/>
+                    <telerik:GridViewDataColumn DataMemberBinding="{Binding Investor.ClientAdvisor.AdvisorName.LastName}" Header="Name des Ansprechpartners"  ColumnGroupName="DirectorInformation"/>
+                    <telerik:GridViewDataColumn DataMemberBinding="{Binding Investor.ClientAdvisor.AdvisorName.FirstName}" Header="Vorname" ColumnGroupName="DirectorInformation"/>
+                    <telerik:GridViewDataColumn DataMemberBinding="{Binding Investor.ClientAdvisor.AdvisorName.Title}" Header="Titel" ColumnGroupName="DirectorInformation"/>
+                    <telerik:GridViewDataColumn DataMemberBinding="{Binding Investor.ClientAdvisor.CompanyName}" Header="Firma" ColumnGroupName="DirectorInformation"/>
+                    <telerik:GridViewDataColumn DataMemberBinding="{Binding Investor.ClientAdvisor.AdvisorName.TelephoneNumber}" Header="Telefon" ColumnGroupName="DirectorInformation"/>
+                    <telerik:GridViewDataColumn DataMemberBinding="{Binding Investor.ClientAdvisor.AdvisorName.EmailAddress}" Header="E-Mail 2" ColumnGroupName="DirectorInformation"/>
+                    <telerik:GridViewDataColumn DataMemberBinding="{Binding Investor.ClientAdvisor.AdvisorName.AddressName}" Header="Anrede Adress-Feld" ColumnGroupName="DirectorInformation"/>
+                    <telerik:GridViewDataColumn DataMemberBinding="{Binding Investor.ClientAdvisor.AdvisorName.Salutation}" Header="Anrede" ColumnGroupName="DirectorInformation"/>
+                    <telerik:GridViewDataColumn DataMemberBinding="{Binding Investor.ClientAdvisor.Address.Street}" Header="Strasse (Versand)"/>
+                    <telerik:GridViewDataColumn DataMemberBinding="{Binding Investor.ClientAdvisor.Address.ZipCode}" Header="PLZ (Versand)"/>
+                    <telerik:GridViewDataColumn DataMemberBinding="{Binding Investor.ClientAdvisor.Address.City}" Header="Ort (Versand)"/>
+                    <telerik:GridViewDataColumn DataMemberBinding="{Binding Investor.PrivateAddress.Street}" Header="Strasse (privat)"/>
+                    <telerik:GridViewDataColumn DataMemberBinding="{Binding Investor.PrivateAddress.ZipCode}" Header="PLZ (privat)"/>
+                    <telerik:GridViewDataColumn DataMemberBinding="{Binding Investor.PrivateAddress.City}" Header="Ort (privat)"/>
+                    <telerik:GridViewDataColumn DataMemberBinding="{Binding Investor.Finanzamt}" Header="Finanzamt" ColumnGroupName="TaxInformation"/>
+                    <telerik:GridViewDataColumn DataMemberBinding="{Binding Investor.Steuernummer}" Header="Steuernummer" ColumnGroupName="TaxInformation"/>
+                    <telerik:GridViewDataColumn DataMemberBinding="{Binding Investor.SteuerIdentifikation}" Header="Steuer-Id" ColumnGroupName="TaxInformation"/>
+                    <telerik:GridViewDataColumn DataMemberBinding="{Binding Investor.SitzDerGesellschaft}" Header="Sitz der Gesellschaft" ColumnGroupName="TaxInformation"/>
+                    <telerik:GridViewDataColumn DataMemberBinding="{Binding Investor.RegisterGericht}" Header="Registergericht" ColumnGroupName="TaxInformation"/>
+                    <telerik:GridViewDataColumn DataMemberBinding="{Binding Investor.HandelsregisterNummer}" Header="Handelsregister" ColumnGroupName="TaxInformation"/>
+                    <telerik:GridViewDataColumn DataMemberBinding="{Binding Investor.TaxAdvisor.Company}" Header="Stb - Firma" ColumnGroupName="TaxInformation"/>
+                    <telerik:GridViewDataColumn DataMemberBinding="{Binding Investor.TaxAdvisor.AdvisorName.Title}" Header="Stb - Titel" ColumnGroupName="TaxInformation"/>
+                    <telerik:GridViewDataColumn DataMemberBinding="{Binding Investor.TaxAdvisor.AdvisorName.FirstName}" Header="Stb - Vorname" ColumnGroupName="TaxInformation"/>
+                    <telerik:GridViewDataColumn DataMemberBinding="{Binding Investor.TaxAdvisor.AdvisorName.LastName}" Header="Stb - Nachname" ColumnGroupName="TaxInformation"/>
+                    <telerik:GridViewDataColumn DataMemberBinding="{Binding Investor.TaxAdvisor.AdvisorName.AddressName}" Header="Stb - AdressAnrede" ColumnGroupName="TaxInformation"/>
+                    <telerik:GridViewDataColumn DataMemberBinding="{Binding Investor.TaxAdvisor.AdvisorName.Salutation}" Header="Stb - Anrede" ColumnGroupName="TaxInformation"/>
+                    <telerik:GridViewDataColumn DataMemberBinding="{Binding Investor.TaxAdvisor.AdvisorName.TelephoneNumber}" Header="Stb - Telefon" ColumnGroupName="TaxInformation"/>
+                    <telerik:GridViewDataColumn DataMemberBinding="{Binding Investor.TaxAdvisor.AdvisorName.FaxNumber}" Header="Stb - Fax" ColumnGroupName="TaxInformation"/>
+                    <telerik:GridViewDataColumn DataMemberBinding="{Binding Investor.TaxAdvisor.AdvisorName.EmailAddress}" Header="Stb - E-Mail" ColumnGroupName="TaxInformation"/>
+                    <telerik:GridViewDataColumn DataMemberBinding="{Binding BankAccount.BankName}" Header="Bank" ColumnGroupName="Bankverbindung" />
+                    <telerik:GridViewDataColumn DataMemberBinding="{Binding BankAccount.Iban}" Header="Iban" ColumnGroupName="Bankverbindung"/>
+                    <telerik:GridViewDataColumn DataMemberBinding="{Binding BankAccount.Currency.CurrencyShortName}" Header="Währung" ColumnGroupName="Bankverbindung"/>
+                    <telerik:GridViewDataColumn DataMemberBinding="{Binding BankAccount.AccountHolder}" Header="Konto-Inhaber"  ColumnGroupName="Bankverbindung"/>
+                    <telerik:GridViewDataColumn DataMemberBinding="{Binding BankAccount.Signature1}" Header="Unterschrift 1" ColumnGroupName="Bankverbindung"/>
+                    <telerik:GridViewDataColumn DataMemberBinding="{Binding BankAccount.Signature2}" Header="Unterschrift 2" ColumnGroupName="Bankverbindung"/>
+                    <telerik:GridViewDataColumn DataMemberBinding="{Binding BankAccount.BankContact.AdvisorName.AddressName}" Header="Bank-Kontakt"  ColumnGroupName="Bankverbindung"/>
+                    <telerik:GridViewDataColumn DataMemberBinding="{Binding BankAccount.BankContact.Address.Street}" Header="Bank - Strasse"  ColumnGroupName="Bankverbindung"/>
+                    <telerik:GridViewDataColumn DataMemberBinding="{Binding BankAccount.BankContact.Address.ZipCode}" Header="Bank - PLZ"  ColumnGroupName="Bankverbindung"/>
+                    <telerik:GridViewDataColumn DataMemberBinding="{Binding BankAccount.BankContact.Address.City}" Header="Bank - Ort"  ColumnGroupName="Bankverbindung"/>
+                    <telerik:GridViewDataColumn DataMemberBinding="{Binding BankAccount.BankContact.Address.Country}" Header="Bank - Land"  ColumnGroupName="Bankverbindung"/>
+                    <telerik:GridViewDataColumn DataMemberBinding="{Binding BankAccount.BankContact.TelephoneNumber}" Header="Bank - Telefon"  ColumnGroupName="Bankverbindung"/>
+                    <telerik:GridViewDataColumn DataMemberBinding="{Binding BankAccount.BankContact.FaxNumber}" Header="Bank - Fax"  ColumnGroupName="Bankverbindung"/>
+                </telerik:RadGridView.Columns>
+            </telerik:RadGridView>
+        </telerik:RadBusyIndicator>
+
+    </Grid>
+</UserControl>
+

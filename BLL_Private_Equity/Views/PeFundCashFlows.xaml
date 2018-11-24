@@ -1,0 +1,65 @@
+﻿<UserControl x:Class="BLL_Private_Equity.Views.PeFundCashFlows"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:prism="http://prismlibrary.com/"
+             prism:ViewModelLocator.AutoWireViewModel="True"
+             xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
+             xmlns:telerik="http://schemas.telerik.com/2008/xaml/presentation"            
+             mc:Ignorable="d">
+    <i:Interaction.Triggers>
+        <prism:InteractionRequestTrigger SourceObject="{Binding NotificationRequest}">
+            <prism:PopupWindowAction IsModal="True" CenterOverAssociatedObject="true"></prism:PopupWindowAction>
+        </prism:InteractionRequestTrigger>
+        <prism:InteractionRequestTrigger SourceObject="{Binding ConfirmationRequest}">
+            <prism:PopupWindowAction IsModal="True" CenterOverAssociatedObject="true"></prism:PopupWindowAction>
+        </prism:InteractionRequestTrigger>
+    </i:Interaction.Triggers>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="80"></RowDefinition>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <TextBlock VerticalAlignment="Center" Margin="50 0 0 0" Text="{Binding Fund.FundShortName}" FontSize="20" FontWeight="bold"></TextBlock>
+        <telerik:RadBusyIndicator IsBusy="{Binding CashFlowsLoading}" BusyContent="Die CashFlows werden geladen"
+                                  Grid.Row="1">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="1*"/>
+                    <ColumnDefinition Width="2*"/>
+                </Grid.ColumnDefinitions>
+
+
+                <telerik:RadGridView ItemsSource="{Binding UniqueCashFlows}"
+                             x:Name="GridViewCashFlows"
+                             IsSynchronizedWithCurrentItem="True"
+                             IsReadOnly="True"
+                             ShowGroupPanel="False"
+                             AutoGenerateColumns="False"
+                             SelectionMode="Single">
+                    <telerik:RadGridView.Columns>
+                        <telerik:GridViewDataColumn Header="Datum (Valuta)" DataMemberBinding="{Binding  CashFlowDate, StringFormat=d}"/>
+                        <telerik:GridViewDataColumn Header="Cashflow Typ" DataMemberBinding="{Binding CashFlowType}"/>
+                        <telerik:GridViewDataColumn Header="CashFlow Betrag" DataMemberBinding="{Binding CashFlowAmount, StringFormat=n2}"/>
+                    </telerik:RadGridView.Columns>
+                </telerik:RadGridView>
+
+                <telerik:RadGridView   ItemsSource="{Binding InvestorCashFlows, Mode=TwoWay}" Grid.Column="1"
+                               IsReadOnly="True"
+                               ShowGroupPanel="False"
+                               AutoGenerateColumns="False">
+                    <telerik:RadGridView.Columns>
+                        <telerik:GridViewDataColumn Header="Investor Referenz" DataMemberBinding="{Binding  InvestorCommitment.Investor.InvestorReference}"/>
+                        <telerik:GridViewDataColumn Header="Commitment" DataMemberBinding="{Binding CommitmentAmount, StringFormat=n0}" TextAlignment="Right"/>
+                        <telerik:GridViewDataColumn Header="CashFlow Betrag" DataMemberBinding="{Binding CashFlowAmount, StringFormat=n2}" TextAlignment="Right"/>
+                    </telerik:RadGridView.Columns>
+
+                </telerik:RadGridView>
+            </Grid>
+        </telerik:RadBusyIndicator>
+
+
+
+    </Grid>
+</UserControl>

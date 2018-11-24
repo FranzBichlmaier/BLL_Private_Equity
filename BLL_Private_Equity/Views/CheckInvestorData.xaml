@@ -1,0 +1,56 @@
+﻿<UserControl x:Class="BLL_Private_Equity.Views.CheckInvestorData"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:prism="http://prismlibrary.com/"
+             prism:ViewModelLocator.AutoWireViewModel="True"
+             xmlns:telerik="http://schemas.telerik.com/2008/xaml/presentation"             
+             mc:Ignorable="d" 
+             >
+    <UserControl.Resources>
+        <DataTemplate x:Key="ErrorTemplate" >
+            <StackPanel Orientation="Horizontal" Margin="0 5 0 5">
+                <TextBlock Text="{Binding ObjectName}" Width="300" VerticalAlignment="Center"></TextBlock>
+                <TextBlock Text="{Binding ErrorText}" VerticalAlignment="Center" Padding="5 0 0 0"/>
+            </StackPanel>
+        </DataTemplate>
+    </UserControl.Resources>
+    <Grid >
+        <Grid.RowDefinitions>
+            <RowDefinition Height="80"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <DockPanel Grid.Row="0" LastChildFill="False">
+            <Button DockPanel.Dock="Right" Margin="0 0 20 0" VerticalAlignment="Center"
+                    Background="{telerik:MaterialResource ResourceKey=PrimaryNormalBrush}"
+                    Command="{Binding GotoNextStepCommand}">
+                <StackPanel Orientation="Horizontal">
+                    <TextBlock Text="weiter" Margin="0 0 15 0" FontSize="20"
+                               Padding="15 0 0 0"
+                               Foreground="{telerik:MaterialResource ResourceKey=PrimaryBrush}" Background="Transparent"
+                               VerticalAlignment="Center"></TextBlock>
+                    <TextBlock Text="{StaticResource GlyphArrowChevronRight}" FontFamily="{StaticResource TelerikWebUI}"
+                               FontSize="32" Foreground="{telerik:MaterialResource ResourceKey=PrimaryBrush}" Background="Transparent"
+                               VerticalAlignment="Center"></TextBlock>
+                </StackPanel>
+            </Button>
+            <Button DockPanel.Dock="Left" Margin="20 0 0 0" VerticalAlignment="Center"
+                    FontSize="32" Content="{StaticResource GlyphReload}" FontFamily="{StaticResource TelerikWebUI}"
+                    ToolTip="Commitments neu laden"
+                    Command="{Binding ReloadInformationCommand}"/>
+        </DockPanel>
+
+
+        <telerik:RadListBox Grid.Row="1" Margin="10"
+                            ItemsSource="{Binding Errors}"
+                            ItemTemplate="{StaticResource ErrorTemplate}"
+                            SelectedItem="{Binding SelectedError, Mode=TwoWay}">
+            <telerik:EventToCommandBehavior.EventBindings>
+                <telerik:EventBinding EventName="SelectionChanged" Command="{Binding ErrorSelectedCommand}"/>
+            </telerik:EventToCommandBehavior.EventBindings>
+        </telerik:RadListBox>
+
+    </Grid>
+</UserControl>
+

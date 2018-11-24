@@ -1,0 +1,83 @@
+﻿<UserControl x:Class="BLL_Private_Equity.Views.ShowInvestorCommitments"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+            xmlns:views="clr-namespace:BLL_Private_Equity.Views"
+             xmlns:prism="http://prismlibrary.com/"
+             prism:ViewModelLocator.AutoWireViewModel="true"
+             xmlns:telerik="http://schemas.telerik.com/2008/xaml/presentation"
+             xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
+             xmlns:infra="clr-namespace:BLL_Infrastructure;assembly=BLL_Infrastructure"
+             xmlns:xceed="http://schemas.xceed.com/wpf/xaml/toolkit"            
+             mc:Ignorable="d" 
+             >
+    <i:Interaction.Triggers>
+        <prism:InteractionRequestTrigger SourceObject="{Binding NotificationRequest}" >
+            <prism:PopupWindowAction IsModal="True" CenterOverAssociatedObject="True"></prism:PopupWindowAction>
+        </prism:InteractionRequestTrigger>
+        <prism:InteractionRequestTrigger SourceObject="{Binding ConfirmationRequest}">
+            <prism:PopupWindowAction IsModal="True" CenterOverAssociatedObject="True"></prism:PopupWindowAction>
+        </prism:InteractionRequestTrigger>
+    </i:Interaction.Triggers>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="2*"/>
+            <ColumnDefinition Width="1*"/>
+        </Grid.ColumnDefinitions>
+        <!-- ClientName and Accountnumber-->
+
+        <StackPanel Orientation="Horizontal" Margin="20" Grid.ColumnSpan="2">
+            <StackPanel.Resources>
+                <Style TargetType="TextBlock">
+                    <Setter Property="FontSize" Value="24"/>
+                    <Setter Property="FontWeight" Value="bold"/>
+                </Style>
+            </StackPanel.Resources>
+            <TextBlock Text="{Binding Investor.InvestorHqTrustAccount}" Margin="0 0 10 0"/>
+            <TextBlock Text="Name des Investors:   " FontSize="12" FontWeight="Normal" VerticalAlignment="Center"/>
+            <TextBlock Text="{Binding Investor.IName.FullName}" Margin="0 0 10 0"/>
+            <TextBlock Text="Investor Referenz:   " FontSize="12" FontWeight="Normal" VerticalAlignment="Center"/>
+            <TextBlock Text="{Binding Investor.InvestorReference}"/>
+        </StackPanel>
+
+
+        <!--   GridView with all Commitments -->
+        <telerik:RadGridView Grid.Row="1" Margin="20 0 20 0"
+                             IsReadOnly="True"
+                             x:Name="GridViewCommitments"
+                            ItemsSource="{Binding Commitments}"
+                             SelectedItem="{Binding SelectedCommitment, Mode=TwoWay}"
+                             ShowGroupPanel="False"
+                             AutoGenerateColumns="False"
+                             RowIndicatorVisibility="Collapsed"
+                             SelectionMode="Extended">
+            <telerik:EventToCommandBehavior.EventBindings>
+                <telerik:EventBinding EventName="MouseDoubleClick" Command="{Binding GridMouseDoubleClickCommand}" ></telerik:EventBinding>
+                <telerik:EventBinding EventName="SelectionChanged" Command="{Binding GridViewSelectionChangedCommand}" 
+                                      CommandParameter="{Binding ElementName=GridViewCommitments, Path=SelectedItems}"/>
+            </telerik:EventToCommandBehavior.EventBindings>
+
+            <telerik:RadGridView.Columns>
+                <telerik:GridViewDataColumn Header="Fund" DataMemberBinding="{Binding PeFund.FundName}"/>
+                <telerik:GridViewDataColumn Header="Commitment" DataMemberBinding="{Binding CommitmentAmount, StringFormat=N0}" TextAlignment="Right"/>
+                <telerik:GridViewDataColumn Header="Currency" DataMemberBinding="{Binding PeFund.Currency.CurrencyShortName}"/>
+                <telerik:GridViewDataColumn Header="bereits abgerufen" DataMemberBinding="{Binding TotalCapitalCalls, StringFormat=N2}" TextAlignment="Right"/>
+                <telerik:GridViewDataColumn Header="Ausschüttungen" DataMemberBinding="{Binding TotalDistributions, StringFormat=N2}" TextAlignment="Right"/>
+                <telerik:GridViewDataColumn Header="IRR" DataMemberBinding="{Binding Irr, StringFormat=N1}" TextAlignment="Center"/>
+                <telerik:GridViewDataColumn Header="DPI" DataMemberBinding="{Binding Dpi, StringFormat=N1}" TextAlignment="Center"/>
+                <telerik:GridViewDataColumn Header="TVPI" DataMemberBinding="{Binding Tvpi, StringFormat=N1}" TextAlignment="Center"/>
+
+            </telerik:RadGridView.Columns>
+        </telerik:RadGridView>
+        <ContentControl Grid.Column="1" Grid.Row="1"
+                        prism:RegionManager.RegionName="{x:Static infra:RegionNames.CommitmentDetailRegion}"/>
+        <xceed:ChildWindow WindowState="{Binding EditCommitmentWindowState, Mode=TwoWay}" Caption="Edit Commitments" Margin="20">
+            <views:EditInvestorCommitment></views:EditInvestorCommitment>
+        </xceed:ChildWindow>
+    </Grid>
+</UserControl>

@@ -34,8 +34,67 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework6.Npgsql, Version=3.2.0.0, Culture=neutral, PublicKeyToken=5d8b90d52f46fda7, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework6.Npgsql.3.2.0\lib\net45\EntityFramework6.Npgsql.dll</HintPath>
+    </Reference>
+    <Reference Include="ExcelFinancialFunctions, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\ExcelFinancialFunctions.2.4\lib\portable-net45+netcore45+wpa81+wp8\ExcelFinancialFunctions.dll</HintPath>
+    </Reference>
+    <Reference Include="FSharp.Core, Version=4.4.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\FSharp.Core.4.0.0.1\lib\net40\FSharp.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Office.Interop.Outlook, Version=15.0.0.0, Culture=neutral, PublicKeyToken=71e9bce111e9429c, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+      <HintPath>..\..\..\..\..\..\Program Files (x86)\Microsoft Office\root\Office16\ADDINS\Microsoft Power Query for Excel Integrated\bin\Microsoft.Office.Interop.Outlook.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Practices.ServiceLocation, Version=1.3.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\CommonServiceLocator.1.3\lib\portable-net4+sl5+netcore45+wpa81+wp8\Microsoft.Practices.ServiceLocation.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Practices.Unity, Version=4.0.0.0, Culture=neutral, PublicKeyToken=6d32ff45e0ccc69f, processorArchitecture=MSIL">
+      <HintPath>..\packages\Unity.4.0.1\lib\net45\Microsoft.Practices.Unity.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Practices.Unity.Configuration, Version=4.0.0.0, Culture=neutral, PublicKeyToken=6d32ff45e0ccc69f, processorArchitecture=MSIL">
+      <HintPath>..\packages\Unity.4.0.1\lib\net45\Microsoft.Practices.Unity.Configuration.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Practices.Unity.RegistrationByConvention, Version=4.0.0.0, Culture=neutral, PublicKeyToken=6d32ff45e0ccc69f, processorArchitecture=MSIL">
+      <HintPath>..\packages\Unity.4.0.1\lib\net45\Microsoft.Practices.Unity.RegistrationByConvention.dll</HintPath>
+    </Reference>
+    <Reference Include="Newtonsoft.Json, Version=11.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.11.0.2\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="Npgsql, Version=4.0.3.0, Culture=neutral, PublicKeyToken=5d8b90d52f46fda7, processorArchitecture=MSIL">
+      <HintPath>..\packages\Npgsql.4.0.3\lib\net451\Npgsql.dll</HintPath>
+    </Reference>
+    <Reference Include="Prism, Version=6.3.0.0, Culture=neutral, PublicKeyToken=40ee6c3a2184dc59, processorArchitecture=MSIL">
+      <HintPath>..\packages\Prism.Core.6.3.0\lib\net45\Prism.dll</HintPath>
+    </Reference>
+    <Reference Include="Prism.Unity.Wpf, Version=6.3.0.0, Culture=neutral, PublicKeyToken=40ee6c3a2184dc59, processorArchitecture=MSIL">
+      <HintPath>..\packages\Prism.Unity.6.3.0\lib\net45\Prism.Unity.Wpf.dll</HintPath>
+    </Reference>
+    <Reference Include="Prism.Wpf, Version=6.3.0.0, Culture=neutral, PublicKeyToken=40ee6c3a2184dc59, processorArchitecture=MSIL">
+      <HintPath>..\packages\Prism.Wpf.6.3.0\lib\net45\Prism.Wpf.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Data" />
+    <Reference Include="System.Threading.Tasks.Extensions, Version=4.2.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Threading.Tasks.Extensions.4.5.0\lib\netstandard2.0\System.Threading.Tasks.Extensions.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Transactions" />
+    <Reference Include="System.ValueTuple, Version=4.0.3.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.ValueTuple.4.5.0\lib\net461\System.ValueTuple.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web" />
+    <Reference Include="System.Windows.Interactivity, Version=4.5.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Prism.Wpf.6.3.0\lib\net45\System.Windows.Interactivity.dll</HintPath>
+    </Reference>
     <Reference Include="System.Xml" />
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Core" />
@@ -45,15 +104,275 @@
     <Reference Include="System.Xaml">
       <RequiredTargetFramework>4.0</RequiredTargetFramework>
     </Reference>
+    <Reference Include="Telerik.Documents.SpreadsheetStreaming, Version=2018.3.1010.40, Culture=neutral, PublicKeyToken=5803cfa389c90ce7, processorArchitecture=MSIL" />
+    <Reference Include="Telerik.Windows.Controls, Version=2018.3.1016.45, Culture=neutral, PublicKeyToken=5803cfa389c90ce7, processorArchitecture=MSIL" />
+    <Reference Include="Telerik.Windows.Controls.Chart, Version=2018.3.1016.45, Culture=neutral, PublicKeyToken=5803cfa389c90ce7, processorArchitecture=MSIL" />
+    <Reference Include="Telerik.Windows.Controls.Data, Version=2018.3.1016.45, Culture=neutral, PublicKeyToken=5803cfa389c90ce7, processorArchitecture=MSIL" />
+    <Reference Include="Telerik.Windows.Controls.Diagrams, Version=2018.3.1016.45, Culture=neutral, PublicKeyToken=5803cfa389c90ce7, processorArchitecture=MSIL" />
+    <Reference Include="Telerik.Windows.Controls.FileDialogs, Version=2018.3.1016.45, Culture=neutral, PublicKeyToken=5803cfa389c90ce7, processorArchitecture=MSIL" />
+    <Reference Include="Telerik.Windows.Controls.FixedDocumentViewers, Version=2018.3.1016.45, Culture=neutral, PublicKeyToken=5803cfa389c90ce7, processorArchitecture=MSIL" />
+    <Reference Include="Telerik.Windows.Controls.FixedDocumentViewersUI, Version=2018.3.1016.45, Culture=neutral, PublicKeyToken=5803cfa389c90ce7, processorArchitecture=MSIL" />
+    <Reference Include="Telerik.Windows.Controls.GridView, Version=2018.3.1016.45, Culture=neutral, PublicKeyToken=5803cfa389c90ce7, processorArchitecture=MSIL" />
+    <Reference Include="Telerik.Windows.Controls.GridView.Export, Version=2018.3.1016.45, Culture=neutral, PublicKeyToken=5803cfa389c90ce7, processorArchitecture=MSIL" />
+    <Reference Include="Telerik.Windows.Controls.Input, Version=2018.3.1016.45, Culture=neutral, PublicKeyToken=5803cfa389c90ce7, processorArchitecture=MSIL" />
+    <Reference Include="Telerik.Windows.Controls.Navigation, Version=2018.3.1016.45, Culture=neutral, PublicKeyToken=5803cfa389c90ce7, processorArchitecture=MSIL" />
+    <Reference Include="Telerik.Windows.Controls.RibbonView, Version=2018.3.1016.45, Culture=neutral, PublicKeyToken=5803cfa389c90ce7, processorArchitecture=MSIL" />
+    <Reference Include="Telerik.Windows.Controls.RichTextBoxUI, Version=2018.3.1016.45, Culture=neutral, PublicKeyToken=5803cfa389c90ce7, processorArchitecture=MSIL" />
+    <Reference Include="Telerik.Windows.Controls.Spreadsheet, Version=2018.3.1016.45, Culture=neutral, PublicKeyToken=5803cfa389c90ce7, processorArchitecture=MSIL" />
+    <Reference Include="Telerik.Windows.Controls.SpreadsheetUI, Version=2018.3.1016.45, Culture=neutral, PublicKeyToken=5803cfa389c90ce7, processorArchitecture=MSIL" />
+    <Reference Include="Telerik.Windows.Data, Version=2018.3.1016.45, Culture=neutral, PublicKeyToken=5803cfa389c90ce7, processorArchitecture=MSIL" />
+    <Reference Include="Telerik.Windows.Diagrams.Core, Version=2018.3.1016.45, Culture=neutral, PublicKeyToken=5803cfa389c90ce7, processorArchitecture=MSIL" />
+    <Reference Include="Telerik.Windows.Documents, Version=2018.3.1016.45, Culture=neutral, PublicKeyToken=5803cfa389c90ce7, processorArchitecture=MSIL" />
+    <Reference Include="Telerik.Windows.Documents.Core, Version=2018.3.1010.40, Culture=neutral, PublicKeyToken=5803cfa389c90ce7, processorArchitecture=MSIL" />
+    <Reference Include="Telerik.Windows.Documents.Fixed, Version=2018.3.1010.40, Culture=neutral, PublicKeyToken=5803cfa389c90ce7, processorArchitecture=MSIL" />
+    <Reference Include="Telerik.Windows.Documents.Flow, Version=2018.3.1010.40, Culture=neutral, PublicKeyToken=5803cfa389c90ce7, processorArchitecture=MSIL" />
+    <Reference Include="Telerik.Windows.Documents.Flow.FormatProviders.Pdf, Version=2018.3.1010.40, Culture=neutral, PublicKeyToken=5803cfa389c90ce7, processorArchitecture=MSIL" />
+    <Reference Include="Telerik.Windows.Documents.FormatProviders.Html, Version=2018.3.1016.45, Culture=neutral, PublicKeyToken=5803cfa389c90ce7, processorArchitecture=MSIL" />
+    <Reference Include="Telerik.Windows.Documents.FormatProviders.OpenXml, Version=2018.3.1016.45, Culture=neutral, PublicKeyToken=5803cfa389c90ce7, processorArchitecture=MSIL" />
+    <Reference Include="Telerik.Windows.Documents.FormatProviders.Pdf, Version=2018.3.1016.45, Culture=neutral, PublicKeyToken=5803cfa389c90ce7, processorArchitecture=MSIL" />
+    <Reference Include="Telerik.Windows.Documents.Spreadsheet, Version=2018.3.1010.40, Culture=neutral, PublicKeyToken=5803cfa389c90ce7, processorArchitecture=MSIL" />
+    <Reference Include="Telerik.Windows.Documents.Spreadsheet.FormatProviders.OpenXml, Version=2018.3.1010.40, Culture=neutral, PublicKeyToken=5803cfa389c90ce7, processorArchitecture=MSIL" />
+    <Reference Include="Telerik.Windows.Documents.Spreadsheet.FormatProviders.Pdf, Version=2018.3.1010.40, Culture=neutral, PublicKeyToken=5803cfa389c90ce7, processorArchitecture=MSIL" />
+    <Reference Include="Telerik.Windows.Zip, Version=2018.3.1010.40, Culture=neutral, PublicKeyToken=5803cfa389c90ce7, processorArchitecture=MSIL" />
     <Reference Include="WindowsBase" />
     <Reference Include="PresentationCore" />
     <Reference Include="PresentationFramework" />
+    <Reference Include="Xceed.Wpf.AvalonDock, Version=3.4.0.0, Culture=neutral, PublicKeyToken=3e4669d2f30244f4, processorArchitecture=MSIL">
+      <HintPath>..\packages\Extended.Wpf.Toolkit.3.4.0\lib\net40\Xceed.Wpf.AvalonDock.dll</HintPath>
+    </Reference>
+    <Reference Include="Xceed.Wpf.AvalonDock.Themes.Aero, Version=3.4.0.0, Culture=neutral, PublicKeyToken=3e4669d2f30244f4, processorArchitecture=MSIL">
+      <HintPath>..\packages\Extended.Wpf.Toolkit.3.4.0\lib\net40\Xceed.Wpf.AvalonDock.Themes.Aero.dll</HintPath>
+    </Reference>
+    <Reference Include="Xceed.Wpf.AvalonDock.Themes.Metro, Version=3.4.0.0, Culture=neutral, PublicKeyToken=3e4669d2f30244f4, processorArchitecture=MSIL">
+      <HintPath>..\packages\Extended.Wpf.Toolkit.3.4.0\lib\net40\Xceed.Wpf.AvalonDock.Themes.Metro.dll</HintPath>
+    </Reference>
+    <Reference Include="Xceed.Wpf.AvalonDock.Themes.VS2010, Version=3.4.0.0, Culture=neutral, PublicKeyToken=3e4669d2f30244f4, processorArchitecture=MSIL">
+      <HintPath>..\packages\Extended.Wpf.Toolkit.3.4.0\lib\net40\Xceed.Wpf.AvalonDock.Themes.VS2010.dll</HintPath>
+    </Reference>
+    <Reference Include="Xceed.Wpf.DataGrid, Version=3.4.0.0, Culture=neutral, PublicKeyToken=3e4669d2f30244f4, processorArchitecture=MSIL">
+      <HintPath>..\packages\Extended.Wpf.Toolkit.3.4.0\lib\net40\Xceed.Wpf.DataGrid.dll</HintPath>
+    </Reference>
+    <Reference Include="Xceed.Wpf.Toolkit, Version=3.4.0.0, Culture=neutral, PublicKeyToken=3e4669d2f30244f4, processorArchitecture=MSIL">
+      <HintPath>..\packages\Extended.Wpf.Toolkit.3.4.0\lib\net40\Xceed.Wpf.Toolkit.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <ApplicationDefinition Include="App.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Berechnungen\AnalyzingParameter.cs" />
+    <Compile Include="Berechnungen\AnalyzingParameterPeriod.cs" />
+    <Compile Include="Berechnungen\BubbleScatterChart.cs" />
+    <Compile Include="Berechnungen\CashFlowDetail.cs" />
+    <Compile Include="Berechnungen\CashFlowErrors.cs" />
+    <Compile Include="Berechnungen\CashFlowInformation.cs" />
+    <Compile Include="Berechnungen\CashFlowLight.cs" />
+    <Compile Include="Berechnungen\ChartCategoryValue.cs" />
+    <Compile Include="Berechnungen\ChartPieChart.cs" />
+    <Compile Include="Berechnungen\CreateClientLetterTelerik.cs" />
+    <Compile Include="Berechnungen\DirectoryHelper.cs" />
+    <Compile Include="Berechnungen\ExcelHelperFunctions.cs" />
+    <Compile Include="Berechnungen\ExtendedCommitment.cs" />
+    <Compile Include="Berechnungen\ExtendedPcap.cs" />
+    <Compile Include="Berechnungen\ImportColumns.cs" />
+    <Compile Include="Berechnungen\PeFundHirarchy.cs" />
+    <Compile Include="Berechnungen\PeFundPerformance.cs" />
+    <Compile Include="Berechnungen\PeFundResults.cs" />
+    <Compile Include="Berechnungen\PsPlusCashFlow.cs" />
+    <Compile Include="Berechnungen\WordTemplateHelper.cs" />
+    <Compile Include="Bootstrapper.cs" />
+    <Compile Include="CloseTabAction.cs" />
+    <Compile Include="Comparer\CashflowComparer.cs" />
+    <Compile Include="Comparer\CashFlowLightComparer.cs" />
+    <Compile Include="Comparer\InvestorCashFlowComparer.cs" />
+    <Compile Include="Comparer\InvestorFullNameComparer.cs" />
+    <Compile Include="Comparer\PcapComparer.cs" />
+    <Compile Include="Converter\AmountToBooleanConverter.cs" />
+    <Compile Include="Converter\AnalyzingParameterPeriodConverter.cs" />
+    <Compile Include="Converter\DifferenceToBackgroundConverter.cs" />
+    <Compile Include="Converter\DifferenceToForegroundConverter.cs" />
+    <Compile Include="Converter\DifferenceToVisibilityConverter.cs" />
+    <Compile Include="Converter\IbanConverter.cs" />
+    <Compile Include="Converter\InvestorGroupConverter.cs" />
+    <Compile Include="Converter\KagbConverter.cs" />
+    <Compile Include="Converter\MifidConverter.cs" />
+    <Compile Include="Converter\StatusToBackgroundColorConverter.cs" />
+    <Compile Include="Converter\StatusToForegroundColorConverter.cs" />
+    <Compile Include="Converter\StringEmptyToVisibilityCollapsedConverter.cs" />
+    <Compile Include="CustomFunctions\CapitalCallFunction.cs" />
+    <Compile Include="CustomFunctions\DistributionFunction.cs" />
+    <Compile Include="Events\AccountCollection.cs" />
+    <Compile Include="Events\AccountCollectionEvent.cs" />
+    <Compile Include="Events\AdvisorUpdatedEvent.cs" />
+    <Compile Include="Events\AnalyzePortfolio.cs" />
+    <Compile Include="Events\AnalyzePortfolioEvent.cs" />
+    <Compile Include="Events\AnalyzingInformation.cs" />
+    <Compile Include="Events\AnalyzingInformationEvent.cs" />
+    <Compile Include="Events\ClientAdvisorUpdateEvent.cs" />
+    <Compile Include="Events\CollectionAction.cs" />
+    <Compile Include="Events\EditInvestorCommitmentResponse.cs" />
+    <Compile Include="Events\EditInvestorCommitmentResponseEvent.cs" />
+    <Compile Include="Events\ImportEvent.cs" />
+    <Compile Include="Events\ImportInformation.cs" />
+    <Compile Include="Events\ImportInformationEvent.cs" />
+    <Compile Include="Events\InitiatorUpdatedEvent.cs" />
+    <Compile Include="Events\InvestorCollectionAction.cs" />
+    <Compile Include="Events\InvestorCollectionActionEvent.cs" />
+    <Compile Include="Events\InvokeEditInvestorCommitment.cs" />
+    <Compile Include="Events\InvokeEditInvestorCommitmentEvent.cs" />
+    <Compile Include="Events\PeFundCollectionAction.cs" />
+    <Compile Include="Events\PeFundCollectionActionEvent.cs" />
+    <Compile Include="Events\PrepareCashFlow.cs" />
+    <Compile Include="Events\PrepareCashFlowEvent.cs" />
+    <Compile Include="Events\ShowPeFundDiagram.cs" />
+    <Compile Include="Events\ShowPeFundDiagramEvent.cs" />
+    <Compile Include="Events\StatusBarEvent.cs" />
+    <Compile Include="RibbonTabs\ApplicationRibbonTab.xaml.cs">
+      <DependentUpon>ApplicationRibbonTab.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="RibbonTabs\ClientAdvisorRibbonTab.xaml.cs">
+      <DependentUpon>ClientAdvisorRibbonTab.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="RibbonTabs\InitiatorRibbonTab.xaml.cs">
+      <DependentUpon>InitiatorRibbonTab.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="RibbonTabs\InvestorCommitmentRibbonTab.xaml.cs">
+      <DependentUpon>InvestorCommitmentRibbonTab.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="RibbonTabs\InvestorRibbonTab.xaml.cs">
+      <DependentUpon>InvestorRibbonTab.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="RibbonTabs\PcapRibbonTab.xaml.cs">
+      <DependentUpon>PcapRibbonTab.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="RibbonTabs\PeFundCommitmentRibbonTab.xaml.cs">
+      <DependentUpon>PeFundCommitmentRibbonTab.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="RibbonTabs\PeFundRibbonTab.xaml.cs">
+      <DependentUpon>PeFundRibbonTab.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="SelectTabAction.cs" />
+    <Compile Include="TelerikHelper\DataFormTextBoxMultilineField.cs" />
+    <Compile Include="Views\AnalyzeContainerViewModel.cs" />
+    <Compile Include="Views\AnalyzeSettingsViewModel.cs" />
+    <Compile Include="Views\ApplicationSettingsViewModel.cs" />
+    <Compile Include="Views\CheckInvestorData.xaml.cs">
+      <DependentUpon>CheckInvestorData.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\CheckInvestorDataViewModel.cs" />
+    <Compile Include="Views\CheckLetters.xaml.cs">
+      <DependentUpon>CheckLetters.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\CheckLettersViewModel.cs" />
+    <Compile Include="Views\ClientAdvisorDetail.xaml.cs">
+      <DependentUpon>ClientAdvisorDetail.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\ClientAdvisorDetailViewModel.cs" />
+    <Compile Include="Views\ClientAdvisorInvestors.xaml.cs">
+      <DependentUpon>ClientAdvisorInvestors.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\ClientAdvisorInvestorsViewModel.cs" />
+    <Compile Include="Views\ClientAdvisorSelection.xaml.cs">
+      <DependentUpon>ClientAdvisorSelection.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\ClientAdvisorSelectionViewModel.cs" />
+    <Compile Include="Views\ControlCashFlow.xaml.cs">
+      <DependentUpon>ControlCashFlow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\ControlCashFlowViewModel.cs" />
+    <Compile Include="Views\EditAccountCollections.xaml.cs">
+      <DependentUpon>EditAccountCollections.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\EditAccountCollectionsViewModel.cs" />
+    <Compile Include="Views\EditCashFlowData.xaml.cs">
+      <DependentUpon>EditCashFlowData.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\EditCashFlowDataViewModel.cs" />
+    <Compile Include="Views\EditInvestorCommitment.xaml.cs">
+      <DependentUpon>EditInvestorCommitment.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\EditInvestorCommitmentViewModel.cs" />
+    <Compile Include="Views\EditInvestorSplit.xaml.cs">
+      <DependentUpon>EditInvestorSplit.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\EditInvestorSplitViewModel.cs" />
+    <Compile Include="Views\EditPcaps.xaml.cs">
+      <DependentUpon>EditPcaps.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\EditPcapsViewModel.cs" />
+    <Compile Include="Views\ExportInvestorList.xaml.cs">
+      <DependentUpon>ExportInvestorList.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\ExportInvestorListViewModel.cs" />
+    <Compile Include="Views\HqtAdvisorDetailViewModel.cs" />
+    <Compile Include="Views\HqtAdvisorSelectionViewModel.cs" />
+    <Compile Include="Views\ImportCashFlowsViewModel.cs" />
+    <Compile Include="Views\ImportCommitmentsViewModel.cs" />
+    <Compile Include="Views\ImportCurrencyRatesViewModel.cs" />
+    <Compile Include="Views\ImportNavViewModel.cs" />
+    <Compile Include="Views\ImportPsPlusViewModel.cs" />
+    <Compile Include="Views\InitiatorDetail.xaml.cs">
+      <DependentUpon>InitiatorDetail.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\InitiatorDetailViewModel.cs" />
+    <Compile Include="Views\InitiatorSelection.xaml.cs">
+      <DependentUpon>InitiatorSelection.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\InitiatorSelectionViewModel.cs" />
+    <Compile Include="Views\InvestorDetails.xaml.cs">
+      <DependentUpon>InvestorDetails.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\InvestorDetailsViewModel.cs" />
+    <Compile Include="Views\InvestorSelection.xaml.cs">
+      <DependentUpon>InvestorSelection.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\InvestorSelectionViewModel.cs" />
+    <Compile Include="Views\PeFundCashFlows.xaml.cs">
+      <DependentUpon>PeFundCashFlows.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\PeFundCashFlowsViewModel.cs" />
+    <Compile Include="Views\PeFundDetail.xaml.cs">
+      <DependentUpon>PeFundDetail.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\PeFundDetailViewModel.cs" />
+    <Compile Include="Views\PeFundDiagram.xaml.cs">
+      <DependentUpon>PeFundDiagram.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\PeFundDiagramViewModel.cs" />
+    <Compile Include="Views\PeFundSelection.xaml.cs">
+      <DependentUpon>PeFundSelection.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\PeFundSelectionViewModel.cs" />
+    <Compile Include="Views\Shell.xaml.cs">
+      <DependentUpon>Shell.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\ShellViewModel.cs" />
+    <Compile Include="Views\ShowInvestorCashFlows.xaml.cs">
+      <DependentUpon>ShowInvestorCashFlows.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\ShowInvestorCashFlowsViewModel.cs" />
+    <Compile Include="Views\ShowInvestorCommitments.xaml.cs">
+      <DependentUpon>ShowInvestorCommitments.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\ShowInvestorCommitmentsViewModel.cs" />
+    <Compile Include="Views\ShowInvestorList.xaml.cs">
+      <DependentUpon>ShowInvestorList.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\ShowInvestorListViewModel.cs" />
+    <Compile Include="Views\ShowInvestorPcap.xaml.cs">
+      <DependentUpon>ShowInvestorPcap.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\ShowInvestorPcapViewModel.cs" />
+    <Compile Include="Views\ShowPeFundCommitments.xaml.cs">
+      <DependentUpon>ShowPeFundCommitments.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\ShowPeFundCommitmentsViewModel.cs" />
+    <Compile Include="Views\ShowPsPlusCashFlowsViewModel.cs" />
+    <Compile Include="Views\StatusBarView.xaml.cs">
+      <DependentUpon>StatusBarView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\StatusBarViewViewModel.cs" />
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -62,12 +381,166 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="BllData.cs" />
     <Compile Include="MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="RibbonTabs\ApplicationRibbonTab.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="RibbonTabs\ClientAdvisorRibbonTab.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="RibbonTabs\InitiatorRibbonTab.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="RibbonTabs\InvestorCommitmentRibbonTab.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="RibbonTabs\InvestorRibbonTab.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="RibbonTabs\PcapRibbonTab.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="RibbonTabs\PeFundCommitmentRibbonTab.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="RibbonTabs\PeFundRibbonTab.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Styles\ApplicationStyles.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\CheckInvestorData.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\CheckLetters.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\ClientAdvisorDetail.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\ClientAdvisorInvestors.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\ClientAdvisorSelection.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\ControlCashFlow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\EditAccountCollections.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\EditCashFlowData.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\EditInvestorCommitment.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\EditInvestorSplit.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\EditPcaps.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\ExportInvestorList.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\InitiatorDetail.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\InitiatorSelection.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\InvestorDetails.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\InvestorSelection.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\PeFundCashFlows.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\PeFundDetail.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\PeFundDiagram.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\PeFundSelection.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Shell.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\ShowInvestorCashFlows.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\ShowInvestorCommitments.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\ShowInvestorList.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\ShowInvestorPcap.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\ShowPeFundCommitments.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\StatusBarView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Migrations\201811211606298_InitialSetUp.cs" />
+    <Compile Include="Migrations\201811211606298_InitialSetUp.Designer.cs">
+      <DependentUpon>201811211606298_InitialSetUp.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201811211842572_AdjustInvestorTable.cs" />
+    <Compile Include="Migrations\201811211842572_AdjustInvestorTable.Designer.cs">
+      <DependentUpon>201811211842572_AdjustInvestorTable.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -81,10 +554,17 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
+    <EmbeddedResource Include="Migrations\201811211606298_InitialSetUp.resx">
+      <DependentUpon>201811211606298_InitialSetUp.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201811211842572_AdjustInvestorTable.resx">
+      <DependentUpon>201811211842572_AdjustInvestorTable.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+    <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -92,6 +572,38 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\..\Documents\Visual Studio 2017\Projects\DateTimeFunctions\DateTimeFunctions.csproj">
+      <Project>{326908e9-40d0-4a60-b252-3ea7d83fa973}</Project>
+      <Name>DateTimeFunctions</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\BLL_DataAccess\BLL_DataAccess.csproj">
+      <Project>{64e837a4-b6ea-4e77-8c02-cef4518fdd74}</Project>
+      <Name>BLL_DataAccess</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Bll_DataModels\Bll_DataModels.csproj">
+      <Project>{497544d1-0699-4057-ab13-b60fcbbf890b}</Project>
+      <Name>Bll_DataModels</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\BLL_Infrastructure\BLL_Infrastructure.csproj">
+      <Project>{c915c1b6-719b-479b-adbf-c7f5af15a7cf}</Project>
+      <Name>BLL_Infrastructure</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\BLL_Prism\BLL_Prism.csproj">
+      <Project>{648e429a-43ab-4330-b712-e20858303993}</Project>
+      <Name>BLL_Prism</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\BLL_Settings\BLL_Settings.csproj">
+      <Project>{8E097235-568C-44CC-8E96-AB86F5BCA8AA}</Project>
+      <Name>BLL_Settings</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Charts\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\HQTrust Logo.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

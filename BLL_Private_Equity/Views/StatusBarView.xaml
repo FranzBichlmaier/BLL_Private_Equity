@@ -1,0 +1,20 @@
+﻿<UserControl x:Class="BLL_Private_Equity.Views.StatusBarView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"             
+             xmlns:telerik="http://schemas.telerik.com/2008/xaml/presentation"
+             xmlns:prism="http://prismlibrary.com/"
+             prism:ViewModelLocator.AutoWireViewModel="true"   
+             mc:Ignorable="d" Height="20" >
+    <Grid Background="{telerik:MaterialResource ResourceKey=ComplementaryBrush}">
+        <DockPanel LastChildFill="False">
+            <TextBlock Text="Hinweis: " DockPanel.Dock="Left" VerticalAlignment="Center"></TextBlock>
+            <TextBlock Text="{Binding StatusBarText}" DockPanel.Dock="Left" Margin="20 0 0 0"
+                       VerticalAlignment="Center"
+                       FontSize="{telerik:MaterialResource ResourceKey=FontSize}"
+                       Foreground="{telerik:MaterialResource ResourceKey=PrimaryNormalBrush}"/>
+        </DockPanel>
+
+    </Grid>
+</UserControl>

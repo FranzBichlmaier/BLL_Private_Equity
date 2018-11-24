@@ -1,0 +1,124 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{497544D1-0699-4057-AB13-B60FCBBF890B}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Bll_DataModels</RootNamespace>
+    <AssemblyName>Bll_DataModels</AssemblyName>
+    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Microsoft.Practices.ServiceLocation, Version=1.3.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\CommonServiceLocator.1.3\lib\portable-net4+sl5+netcore45+wpa81+wp8\Microsoft.Practices.ServiceLocation.dll</HintPath>
+    </Reference>
+    <Reference Include="Newtonsoft.Json, Version=11.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.11.0.2\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="Prism, Version=6.3.0.0, Culture=neutral, PublicKeyToken=40ee6c3a2184dc59, processorArchitecture=MSIL">
+      <HintPath>..\packages\Prism.Core.6.3.0\lib\net45\Prism.dll</HintPath>
+    </Reference>
+    <Reference Include="Prism.Wpf, Version=6.3.0.0, Culture=neutral, PublicKeyToken=40ee6c3a2184dc59, processorArchitecture=MSIL">
+      <HintPath>..\packages\Prism.Wpf.6.3.0\lib\net45\Prism.Wpf.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.ComponentModel.Composition" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Windows.Interactivity, Version=4.5.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Prism.Wpf.6.3.0\lib\net45\System.Windows.Interactivity.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Address.cs" />
+    <Compile Include="Advisor.cs" />
+    <Compile Include="AnwendungsInformationen.cs" />
+    <Compile Include="BankAccount.cs" />
+    <Compile Include="CapitalCallView.cs" />
+    <Compile Include="CashFlowBarChart.cs" />
+    <Compile Include="CashFlowData.cs" />
+    <Compile Include="ClientAdvisor.cs" />
+    <Compile Include="CommitmentEditMode.cs" />
+    <Compile Include="CommitmentRangeBarChart.cs" />
+    <Compile Include="CommitmentView.cs" />
+    <Compile Include="Country.cs" />
+    <Compile Include="Currency.cs" />
+    <Compile Include="CurrencyRate.cs" />
+    <Compile Include="DistributionView.cs" />
+    <Compile Include="DocType.cs" />
+    <Compile Include="DocumentAndLetter.cs" />
+    <Compile Include="DocumentType.cs" />
+    <Compile Include="EMailAccount.cs" />
+    <Compile Include="ExcelNav.cs" />
+    <Compile Include="FundCompanySize.cs" />
+    <Compile Include="FundGeography.cs" />
+    <Compile Include="FundManager.cs" />
+    <Compile Include="FundType.cs" />
+    <Compile Include="Gender.cs" />
+    <Compile Include="ImportCashFlow.cs" />
+    <Compile Include="ImportCommitment.cs" />
+    <Compile Include="ImportInvestor.cs" />
+    <Compile Include="Initiator.cs" />
+    <Compile Include="Investor.cs" />
+    <Compile Include="InvestorCashFlow.cs" />
+    <Compile Include="InvestorCollection.cs" />
+    <Compile Include="InvestorCommitment.cs" />
+    <Compile Include="InvestorCommitmentDetail.cs" />
+    <Compile Include="InvestorDataErrors.cs" />
+    <Compile Include="InvestorGroup.cs" />
+    <Compile Include="InvestorPcap.cs" />
+    <Compile Include="InvestorToDo.cs" />
+    <Compile Include="Kagb.cs" />
+    <Compile Include="KeyEnumPair.cs" />
+    <Compile Include="ManualCashFlow.cs" />
+    <Compile Include="ManualCashFlowCollection.cs" />
+    <Compile Include="Message.cs" />
+    <Compile Include="Mifid.cs" />
+    <Compile Include="Name.cs" />
+    <Compile Include="PcapView.cs" />
+    <Compile Include="PeActionCapitalCall.cs" />
+    <Compile Include="PeFund.cs" />
+    <Compile Include="PeFundCashFlow.cs" />
+    <Compile Include="PeFundPcap.cs" />
+    <Compile Include="PrintPcap.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ReportInformationCapitalCall.cs" />
+    <Compile Include="ReportNumber.cs" />
+    <Compile Include="TaxInformation.cs" />
+    <Compile Include="TextComponent.cs" />
+    <Compile Include="UniqueCashFlowNumber.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="app.config" />
+    <None Include="packages.config" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+</Project>

@@ -1,0 +1,68 @@
+﻿<telerik:RadRibbonTab x:Class="BLL_Private_Equity.RibbonTabs.PeFundRibbonTab"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:telerik="http://schemas.telerik.com/2008/xaml/presentation"           
+             mc:Ignorable="d" 
+             Header="Private Equity Funds" IsSelected="True">
+    <telerik:RadRibbonGroup Header="Private Equity Funds">
+        <telerik:RadRibbonButton Text="speichern" Command="{Binding SaveChangesCommand}" 
+                                 IsAutoSize="True"
+                                 LargeImage="{telerik:RadGlyph Glyph={StaticResource GlyphSave}, Size=32}"
+                                 SmallImage="{telerik:RadGlyph Glyph={StaticResource GlyphSave}, Size=16}"
+                                 />
+        <telerik:RadRibbonButton Text="verwerfen" Command="{Binding UndoChangesCommand}"
+                                  LargeImage="{telerik:RadGlyph Glyph={StaticResource GlyphReset}, Size=32}"
+                                 SmallImage="{telerik:RadGlyph Glyph={StaticResource GlyphReset}, Size=16}"
+                                 IsAutoSize="True"/>
+        <telerik:RadRibbonButton Text="löschen" Command="{Binding RemoveFundCommand}"
+                                  LargeImage="{telerik:RadGlyph Glyph={StaticResource GlyphDelete}, Size=32}"
+                                 SmallImage="{telerik:RadGlyph Glyph={StaticResource GlyphDelete}, Size=16}"
+                                 IsAutoSize="True"/>
+    </telerik:RadRibbonGroup>
+    <telerik:RadRibbonGroup Header="Commitments">
+        <telerik:RadRibbonButton Text="Commitments anzeigen" Command="{Binding ShowCommitmentsCommand}"
+                                 IsAutoSize="True"/>
+        <telerik:RadRibbonButton Text="Investorenliste exportieren" Command="{Binding ExportInvestorListCommand}"
+                                  LargeImage="{telerik:RadGlyph Glyph={StaticResource GlyphExcel}, Size=32}"
+                                 SmallImage="{telerik:RadGlyph Glyph={StaticResource GlyphExcel}, Size=16}"
+                                 IsAutoSize="True"/>
+    </telerik:RadRibbonGroup>
+    <telerik:RadRibbonGroup Header="Cash Flows">
+        <telerik:RadRibbonDropDownButton Text="Cashflows anzeigen  ...">
+            <telerik:RadRibbonDropDownButton.DropDownContent>
+                <telerik:RadContextMenu BorderThickness="0">
+                    <telerik:RadMenuItem Header="für den ausgewählten Fund" Command="{Binding ShowCashFlowsCommand}">
+
+                    </telerik:RadMenuItem>
+                    <telerik:RadMenuItem Header="für die Beteiligungsnummer" Command="{Binding ShowPsPlusCashFlowsCommand}">
+
+                    </telerik:RadMenuItem>
+                </telerik:RadContextMenu>
+            </telerik:RadRibbonDropDownButton.DropDownContent>
+        </telerik:RadRibbonDropDownButton>
+        <!--<telerik:RadRibbonButton Text="Cash Flows anzeigen" Command="{Binding ShowCashFlowsCommand}" 
+                                 IsAutoSize="True"
+                                 LargeImage="{telerik:RadGlyph Glyph={StaticResource GlyphGridLayout}, Size=32}"
+                                 SmallImage="{telerik:RadGlyph Glyph={StaticResource GlyphGridLayout}, Size=16}"
+                                 />-->
+        <telerik:RadRibbonButton Text="neuen Cash Flow erfassen" Command="{Binding NewCashFlowCommand}" 
+                                 IsAutoSize="True"
+                                 LargeImage="{telerik:RadGlyph Glyph={StaticResource GlyphPlus}, Size=32}"
+                                 SmallImage="{telerik:RadGlyph Glyph={StaticResource GlyphPlus}, Size=16}"
+                                 />
+        <telerik:RadRibbonButton Text="Cash Flow weiter bearbeiten" Command="{Binding EditCashFlowCommand}"
+                                  LargeImage="{telerik:RadGlyph Glyph={StaticResource GlyphEdit}, Size=32}"
+                                 SmallImage="{telerik:RadGlyph Glyph={StaticResource GlyphEdit}, Size=16}"
+                                 IsAutoSize="True"/>
+    </telerik:RadRibbonGroup>
+    <telerik:RadRibbonGroup Header="PCaps / NAVs">
+        <telerik:RadRibbonButton Text="PCaps erfassen" Command="{Binding EditPcapsCommand}" 
+                                 IsAutoSize="True"
+                                 LargeImage="{telerik:RadGlyph Glyph={StaticResource GlyphEdit}, Size=32}"
+                                 SmallImage="{telerik:RadGlyph Glyph={StaticResource GlyphEdit}, Size=16}"
+                                 />
+    </telerik:RadRibbonGroup>
+    </telerik:RadRibbonTab>
+

@@ -1,0 +1,61 @@
+﻿<telerik:RadRibbonTab x:Class="BLL_Private_Equity.RibbonTabs.ApplicationRibbonTab"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:BLL_Private_Equity.RibbonTabs"
+             mc:Ignorable="d" 
+               xmlns:telerik="http://schemas.telerik.com/2008/xaml/presentation"      
+             Header="Allgemein" x:Name="PermanentRibbonTab" Height="50"
+             d:DesignHeight="450" d:DesignWidth="800">
+    <telerik:RadRibbonGroup Header="Aktionen">
+        <telerik:RadRibbonDropDownButton Text="Neu ...">
+            <telerik:RadRibbonDropDownButton.DropDownContent>
+                <telerik:RadContextMenu BorderThickness="0">
+                    <telerik:RadMenuItem Header="neuen Investor anlegen" Command="{Binding AddInvestorCommand}">
+                        <telerik:RadMenuItem.Icon>
+                            <Image Source="{telerik:RadGlyph Glyph={StaticResource GlyphPlus}}"></Image>
+                        </telerik:RadMenuItem.Icon>
+                    </telerik:RadMenuItem>
+                    <telerik:RadMenuItem Header="neuen Fund anlegen" Command="{Binding AddPeFundCommand}">
+                        <telerik:RadMenuItem.Icon>
+                            <Image Source="{telerik:RadGlyph Glyph={StaticResource GlyphPlus}}"></Image>
+                        </telerik:RadMenuItem.Icon>
+                    </telerik:RadMenuItem>
+                    <telerik:RadMenuItem Header="neuen Initiator anlegen" Command="{Binding AddInitiatorCommand}">
+                        <telerik:RadMenuItem.Icon>
+                            <Image Source="{telerik:RadGlyph Glyph={StaticResource GlyphPlus}}"></Image>
+                        </telerik:RadMenuItem.Icon>
+                    </telerik:RadMenuItem>
+                    <!--<telerik:RadMenuItem Header="neuen HQT-Betreuer anlegen" Command="{Binding AddAdvisorCommand}">
+                        <telerik:RadMenuItem.Icon>
+                            <Image Source="{telerik:RadGlyph Glyph={StaticResource GlyphPlus}}"></Image>
+                        </telerik:RadMenuItem.Icon>
+                    </telerik:RadMenuItem>-->
+                    <telerik:RadMenuItem Header="neuen Kunden-Betreuer anlegen" Command="{Binding AddClientAdvisorCommand}">
+                        <telerik:RadMenuItem.Icon>
+                            <Image Source="{telerik:RadGlyph Glyph={StaticResource GlyphPlus}}"></Image>
+                        </telerik:RadMenuItem.Icon>
+                    </telerik:RadMenuItem>
+
+                </telerik:RadContextMenu>
+            </telerik:RadRibbonDropDownButton.DropDownContent>
+        </telerik:RadRibbonDropDownButton>
+
+    </telerik:RadRibbonGroup>
+    <telerik:RadRibbonGroup Header="Import">
+        <telerik:RadRibbonButton Text="Import von PS-Plus"
+                                 Command="{Binding StartImportFromPsPlusCommand}"
+                                 IsAutoSize="True"/>
+    </telerik:RadRibbonGroup>
+
+
+    <telerik:RadRibbonGroup Header="Berichte">
+        <telerik:RadRibbonButton Text="Investoren-Liste"
+                                     Command="{Binding ShowInvestorListCommand}"
+                                     IsAutoSize="True"/>
+        <telerik:RadRibbonButton Text="Fund-Liste"
+                                 Command="{Binding ShowPeFundListCommand}"
+                                 IsAutoSize="True"></telerik:RadRibbonButton>
+    </telerik:RadRibbonGroup>
+</telerik:RadRibbonTab>

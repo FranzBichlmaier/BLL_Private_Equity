@@ -1,0 +1,84 @@
+﻿<UserControl x:Class="BLL_Private_Equity.Views.ShowPeFundCommitments"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:prism="http://prismlibrary.com/"
+             prism:ViewModelLocator.AutoWireViewModel="True"
+             xmlns:telerik="http://schemas.telerik.com/2008/xaml/presentation"        
+             mc:Ignorable="d" Loaded="Border_Loaded"
+             >
+    <telerik:EventToCommandBehavior.EventBindings>
+        <telerik:EventBinding EventName="Loaded" Command="{Binding OnWindowLoadedCommand}"/>
+    </telerik:EventToCommandBehavior.EventBindings>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="2*"/>
+            <ColumnDefinition Width="1*"/>
+        </Grid.ColumnDefinitions>
+
+        <!--  Row 0: Display FundName -->
+
+        <TextBlock Margin="50 5 0 5" Text="{Binding Fund.FundLegalName}"
+                   FontSize="{telerik:MaterialResource ResourceKey=FontSizeL}"
+                   FontWeight="Bold"/>
+
+        <!--  Row 1 Show Commitments -->
+
+        <telerik:RadTreeListView x:Name="TreeListViewFunds" Grid.Row="1"                              
+                                 ItemsSource="{Binding Hirarchies}"
+                                 ShowColumnFooters="True"                                 
+                                 AutoGenerateColumns="False"
+                                 RowIndicatorVisibility="Collapsed"                                 
+                                 ShowGroupPanel="False"
+                                 IsExpandedBinding="{Binding IsExpanded, Mode=TwoWay}">
+            <telerik:RadTreeListView.ChildTableDefinitions>
+                <telerik:TreeListViewTableDefinition ItemsSource="{Binding Feeder}" />
+            </telerik:RadTreeListView.ChildTableDefinitions>
+            <telerik:RadTreeListView.Columns>
+                <telerik:GridViewToggleRowDetailsColumn/>
+                <telerik:GridViewDataColumn Header="Fondsname" DataMemberBinding="{Binding Fund.FundName}"/>
+                <telerik:GridViewDataColumn Header="Anzahl der investoren" DataMemberBinding="{Binding NrOfInvestors, StringFormat=n0}" 
+                                            TextAlignment="Right"/>
+                <telerik:GridViewDataColumn Header="Summe der Commitments" DataMemberBinding="{Binding TotalCommitments, StringFormat=n0}" 
+                                            TextAlignment="Right">
+                    <telerik:GridViewDataColumn.AggregateFunctions>
+                        <telerik:SumFunction Caption="insgesamt: " ResultFormatString="{} {0:n0}"/>
+                    </telerik:GridViewDataColumn.AggregateFunctions>
+                </telerik:GridViewDataColumn>
+                <telerik:GridViewDataColumn Header="Währung" DataMemberBinding="{Binding Fund.Currency.CurrencyShortName}"/>
+            </telerik:RadTreeListView.Columns>
+            <telerik:RadTreeListView.RowDetailsTemplate>
+                <DataTemplate>
+                    <telerik:RadGridView Margin="100 10 0 20" x:Name="GridViewInvestors"
+                                         Background="{telerik:MaterialResource ResourceKey=ComplementaryBrush}"
+                                         ShowGroupPanel="False"                                         
+                                         ItemsSource="{Binding Commitments}"
+                                         AutoGenerateColumns="False"
+                                         RowIndicatorVisibility="Collapsed">
+                        <telerik:RadGridView.Columns>
+                            <telerik:GridViewDataColumn Header="Investor" DataMemberBinding="{Binding Investor.CompanyName}"/>
+                            <telerik:GridViewDataColumn Header="Name" DataMemberBinding="{Binding Investor.IName.FullName}"/>
+                            <telerik:GridViewDataColumn Header="Commitment" DataMemberBinding="{Binding CommitmentAmount, StringFormat=n0}"
+                                                        TextAlignment="Right"></telerik:GridViewDataColumn>
+                        </telerik:RadGridView.Columns>
+                        <telerik:EventToCommandBehavior.EventBindings>
+                            <telerik:EventBinding EventName="SelectionChanged" 
+                                                  Command="{Binding RelativeSource={RelativeSource AncestorType={x:Type UserControl}}, Path=DataContext.InvestorRowSelectedCommand}"
+                                                  CommandParameter="{Binding SelectedItem, ElementName=GridViewInvestors}"/>
+                        </telerik:EventToCommandBehavior.EventBindings>
+                    </telerik:RadGridView>
+                </DataTemplate>
+            </telerik:RadTreeListView.RowDetailsTemplate>
+        </telerik:RadTreeListView>
+        <!-- Row 1 Column 1 Show PeFundDiagram -->
+        <Border Grid.Row="1" Grid.Column="1" x:Name="BorderDiagram">
+
+        </Border>
+
+    </Grid>
+</UserControl>

@@ -1,0 +1,316 @@
+﻿<UserControl x:Class="BLL_Private_Equity.Views.PeFundDetail"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+            xmlns:views="clr-namespace:BLL_Private_Equity.Views"
+             xmlns:converter="clr-namespace:BLL_Private_Equity.Converter"
+             xmlns:prism="http://prismlibrary.com/"
+             prism:ViewModelLocator.AutoWireViewModel="True"
+             xmlns:telerik="http://schemas.telerik.com/2008/xaml/presentation"
+             xmlns:telerikHelper="clr-namespace:BLL_Private_Equity.TelerikHelper"
+             xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"            
+             mc:Ignorable="d">
+
+    <telerik:EventToCommandBehavior.EventBindings>
+        <telerik:EventBinding EventName="Loaded" Command="{Binding LoadedCommand}"/>
+    </telerik:EventToCommandBehavior.EventBindings>
+    <i:Interaction.Triggers>
+        <prism:InteractionRequestTrigger SourceObject="{Binding NotificationRequest}">
+            <prism:PopupWindowAction IsModal="True" CenterOverAssociatedObject="True"/>
+        </prism:InteractionRequestTrigger>
+        <prism:InteractionRequestTrigger SourceObject="{Binding ConfirmationRequest}">
+            <prism:PopupWindowAction IsModal="True" CenterOverAssociatedObject="True"/>
+        </prism:InteractionRequestTrigger>
+    </i:Interaction.Triggers>
+
+    <UserControl.Resources>
+
+        <telerik:BooleanToOpacityConverter x:Key="BooleanToOpacityConverter"/>
+        <telerik:InvertedBooleanToOpacityConverter x:Key="InvertedBooleanToOpacityConverter"/>
+        <telerik:BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter"/>
+        <telerik:InvertedBooleanToVisibilityConverter x:Key="InvertedBooleanToVisibilityConverter"/>
+        <telerik:EnumToVisibilityConverter x:Key="EnumToVisibilityConverter"/>
+        <telerik:ColorToBrushConverter x:Key="ColorToBrushConverter"/>
+        <telerik:NullToVisibilityConverter x:Key="NullToVisibilityConverter"/>
+        <telerik:DateTimeTypeConverter x:Key="DateTimeTypeConverter"/>
+        <telerik:UppercaseConverter x:Key="UppercaseConverter"/>
+        <telerik:BinaryImageConverter x:Key="BinaryImageConverter"/>
+        <telerik:DoubleToThicknessConverter x:Key="DoubleToThicknessConverter"/>
+        <telerik:OpacityConverter x:Key="OpacityConverter"/>
+
+        <converter:StringEmptyToVisibilityCollapsedConverter x:Key="StringEmptyConverter"/>
+
+    </UserControl.Resources>
+    <Grid >
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="2*"/>
+            <ColumnDefinition Width="1*"/>
+        </Grid.ColumnDefinitions>
+
+        <TabControl Margin="10" x:Name="PeFundTabControl">
+            <TabControl.Resources>
+                <Style TargetType="TabItem">
+
+                    <Setter Property="Template">
+                        <Setter.Value>
+                            <ControlTemplate TargetType="TabItem">
+                                <Grid Name="Panel">
+                                    <ContentPresenter x:Name="ContentSite"
+                                        VerticalAlignment="Center"
+                                        HorizontalAlignment="Center"
+                                        ContentSource="Header"
+                                        Margin="10,2"/>
+                                </Grid>
+                                <ControlTemplate.Triggers>
+                                    <Trigger Property="IsSelected" Value="True">
+                                        <Setter TargetName="Panel" Property="Background" Value="{telerik:MaterialResource ResourceKey=ComplementaryBrush}" />
+                                    </Trigger>
+                                    <Trigger Property="IsSelected" Value="False">
+                                        <Setter TargetName="Panel" Property="Background" Value="{telerik:MaterialResource ResourceKey=PrimaryBrush}" />
+
+                                    </Trigger>
+                                </ControlTemplate.Triggers>
+                            </ControlTemplate>
+                        </Setter.Value>
+                    </Setter>
+                </Style>
+                <Style TargetType="telerik:DataFormDataField">
+                    <Setter Property="LabelPosition" Value="Beside"/>
+                    <Setter Property="Margin" Value="0 0 0 10"/>
+                    <Setter Property="Width" Value="600"/>
+
+
+                </Style>
+                <Style TargetType="telerik:DataFormComboBoxField">
+                    <Setter Property="LabelPosition" Value="Beside"/>
+                    <Setter Property="Margin" Value="0 0 0 10"/>
+                    <Setter Property="Width" Value="600"/>
+
+                </Style>
+                <Style TargetType="telerik:DataFormDateField">
+                    <Setter Property="LabelPosition" Value="Beside"/>
+                    <Setter Property="Margin" Value="0 0 0 10"/>
+                    <Setter Property="Width" Value="600"/>
+
+                </Style>
+                <Style TargetType="telerik:DataFormCheckBoxField">
+                    <Setter Property="Margin" Value="0 0 0 10"/>
+                    <Setter Property="Width" Value="600"/>
+
+                </Style>
+            </TabControl.Resources>
+
+            <TabItem Header="Allgemeine Angaben" >
+                <Border Margin="10 20 0 0">
+                    <ScrollViewer>
+                        <StackPanel>
+                            <telerik:DataFormDataField Label="PS Plus Beteiligung" DataMemberBinding="{Binding SelectedFund.FundHqTrustNumber}"/>
+                            <telerik:DataFormDataField Label="Fondsbezeichung" DataMemberBinding="{Binding SelectedFund.FundName}"/>
+                            <telerik:DataFormDataField Label="Fondskurzbezeichnung" DataMemberBinding="{Binding SelectedFund.FundShortName}"/>
+                            <telerik:DataFormDataField Label="Gesellschaft und Rechtsform" DataMemberBinding="{Binding SelectedFund.FundLegalName}"/>
+                            <telerik:DataFormComboBoxField Label="Fonds-Währung" DataMemberBinding="{Binding SelectedFund.CurrencyId}"
+                                                       DisplayMemberPath="CurrencyShortName" SelectedValuePath="Id"
+                                                       ItemsSource="{Binding Currencies}"/>
+                            <telerik:DataFormComboBoxField Label="Fondsmanager" DataMemberBinding="{Binding SelectedFund.FundManagerId}"
+                                                       DisplayMemberPath="FundManagerName" SelectedValuePath="Id"
+                                                       ItemsSource="{Binding FundManagers}"/>
+                            <telerik:DataFormComboBoxField Label="FondsTyp" DataMemberBinding="{Binding SelectedFund.FundTypeId}"
+                                                       DisplayMemberPath="FundTypeName" SelectedValuePath="Id"
+                                                       ItemsSource="{Binding FundTypes}"/>
+                            <telerik:DataFormComboBoxField Label="regionaler Schwerpunkt" DataMemberBinding="{Binding SelectedFund.FundGeographyId}"
+                                                       DisplayMemberPath="Geography" SelectedValuePath="Id"
+                                                       ItemsSource="{Binding Geographies}"/>
+                            <telerik:DataFormComboBoxField Label="Schwerpunkt Unternehmensgrößen" DataMemberBinding="{Binding SelectedFund.FundCompanySizeId}"
+                                                       DisplayMemberPath="CompanySize" SelectedValuePath="Id"
+                                                       ItemsSource="{Binding CompanySizes}"/>
+                            <telerik:DataFormDataField Label="Jahr der Auflage" DataMemberBinding="{Binding SelectedFund.VintageYear}"/>
+                            <telerik:DataFormDataField Label="Fondsvolumen (0: wird berechnet)" DataMemberBinding="{Binding SelectedFund.FundVolume}"/>
+                            <telerik:DataFormCheckBoxField Label="von HQT aufgelegt" DataMemberBinding="{Binding SelectedFund.IsHqTrustFund}"/>
+                            <telerik:DataFormCheckBoxField Label="Cashflow von PS Plus verwenden" DataMemberBinding="{Binding SelectedFund.IsExternalAdministrated}"/>
+                            <telerik:DataFormCheckBoxField Label="von Liqid aufgelegt" DataMemberBinding="{Binding SelectedFund.IsLiqidFund}"/>
+                            <telerik:DataFormComboBoxField Label="Fund ist Feeder von" DataMemberBinding="{Binding SelectedFund.PeFundId}"
+                                                       DisplayMemberPath="FundShortName" SelectedValuePath="Id"
+                                                       ItemsSource="{Binding FeederFunds}"/>
+
+                        </StackPanel>
+                    </ScrollViewer>
+                </Border>
+
+            </TabItem>
+            <TabItem Header="Angaben auf Briefen">
+                <Border Margin="10 20 0 0" Width="{Binding ElementName=PeFundTabControl, Path=ActualWidth}"
+                        >
+                    <ScrollViewer>
+                        <DockPanel LastChildFill="False">
+                            <telerikHelper:DataFormTextBoxMultilineField Label="Angaben im Betreff:" DataMemberBinding="{Binding SelectedFund.SubjectForLetter}"
+                                                       DockPanel.Dock="Top"/>
+
+                            <telerik:DataFormComboBoxField DockPanel.Dock="Top"
+                                Label="Initiator" DataMemberBinding="{Binding SelectedFund.InitiatorId}"
+                                                       DisplayMemberPath="InitiatorName" SelectedValuePath="Id"
+                                                       ItemsSource="{Binding Initiators}"/>
+                            <telerik:RadButton Command="{Binding EditInitiatorCommand}"      DockPanel.Dock="Top"
+                                               HorizontalAlignment="Right"
+                                               VerticalAlignment="Center"
+                                                   Margin="0 20 10 20"
+                                                   FontFamily="{StaticResource TelerikWebUI}" FontSize="16"
+                                                   ToolTip="Initiatorangaben bearbeiten oder neuen Initiator anlegen" 
+                                                   >
+                                <StackPanel Orientation="Horizontal">
+                                    <TextBlock FontFamily="{StaticResource TelerikWebUI}" Text="{StaticResource GlyphGear}"></TextBlock>
+                                    <TextBlock Text="Initiator-Angaben bearbeiten" Margin="5 0 0 0"/>
+                                </StackPanel>
+                            </telerik:RadButton>
+                            <TextBlock DockPanel.Dock="top" HorizontalAlignment="Left" Margin="20 0 0 10"
+                                       Text="Vorschau:" FontSize="{telerik:MaterialResource ResourceKey=FontSizeL}"/>
+                            <Grid Background="LightGray" HorizontalAlignment="Stretch" Margin="5">
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="2*"/>
+                                    <RowDefinition Height="4*"/>
+                                    <RowDefinition Height="2*"/>
+                                    <RowDefinition Height="3*"/>
+                                </Grid.RowDefinitions>
+                                <!-- Row 0 Kopfzeile -->
+                                <StackPanel>
+                                    <TextBlock Text="Briefkopf" FontSize="{telerik:MaterialResource ResourceKey=FontSizeS}" Margin="0 0 0 5"/>
+                                    <Border HorizontalAlignment="Stretch">
+                                        <TextBlock Text="{Binding SelectedFund.Initiator.InitiatorName}" FontSize="20"
+                                               HorizontalAlignment="Center"/>
+                                    </Border>
+                                </StackPanel>
+                                <!-- Row 1 AddressInformation and Sender -->
+                                <Grid Grid.Row="1">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="2*"/>
+                                        <ColumnDefinition Width="1*"/>
+                                    </Grid.ColumnDefinitions>
+                                    <StackPanel>
+
+
+                                        <TextBlock Text="Absenderangaben:" FontSize="{telerik:MaterialResource ResourceKey=FontSizeS}" Margin="0 0 0 5"/>
+
+                                        <TextBlock Text="{Binding SelectedFund.Initiator.SenderInformation}" 
+                                               FontSize="{telerik:MaterialResource ResourceKey=FontSizeS}"/>
+                                        <TextBlock Text="{Binding SelectedFund.Initiator.SenderInformationLine2}" 
+                                               FontSize="{telerik:MaterialResource ResourceKey=FontSizeS}"/>
+                                        <TextBlock Text="Persönlich / Vertraulich ..." FontWeight="Bold" Margin="0 10 0 0"/>
+                                    </StackPanel>
+                                    <StackPanel Grid.Column="1">
+                                        <TextBlock Text="Absenderangaben:" FontSize="{telerik:MaterialResource ResourceKey=FontSizeS}" Margin="0 0 0 5"/>
+                                        <StackPanel >
+                                            <TextBlock Text="Sitzadresse:"
+                                                       FontSize="{telerik:MaterialResource ResourceKey=FontSizeS}"/>
+                                            <TextBlock Text="{Binding SelectedFund.Initiator.HeadQuarterAddress.Street}"
+                                                       FontSize="{telerik:MaterialResource ResourceKey=FontSizeS}"/>
+                                            <TextBlock Text="{Binding SelectedFund.Initiator.HeadQuarterAddress.Street2}"
+                                                       FontSize="{telerik:MaterialResource ResourceKey=FontSizeS}"
+                                                       Visibility="{Binding SelectedFund.Initiator.HeadQuarterAddress.Street2, Converter={StaticResource StringEmptyConverter}}"/>
+                                            <StackPanel Orientation="Horizontal">
+                                                <TextBlock Text="{Binding SelectedFund.Initiator.HeadQuarterAddress.ZipCode}"
+                                                       FontSize="{telerik:MaterialResource ResourceKey=FontSizeS}"/>
+                                                <TextBlock Text="{Binding SelectedFund.Initiator.HeadQuarterAddress.City}"
+                                                       FontSize="{telerik:MaterialResource ResourceKey=FontSizeS}"
+                                                           Margin="5 0 0 0"/>
+                                            </StackPanel>
+
+                                        </StackPanel>
+                                        <StackPanel Margin="0 10 0 0" Visibility="{Binding HasHeadQuarter, Converter={StaticResource ResourceKey=BooleanToVisibilityConverter}}">
+                                            <!-- InitiatorAddress -->
+                                            <TextBlock Text="Postanschrift"
+                                                       FontSize="{telerik:MaterialResource ResourceKey=FontSizeS}"/>
+                                            <TextBlock Text="{Binding SelectedFund.Initiator.InitiatorAddress.Street}"
+                                                       FontSize="{telerik:MaterialResource ResourceKey=FontSizeS}"/>
+                                            <TextBlock Text="{Binding SelectedFund.Initiator.InitiatorAddress.Street2}"
+                                                       FontSize="{telerik:MaterialResource ResourceKey=FontSizeS}"
+                                                       Visibility="{Binding SelectedFund.Initiator.InitiatorAddress.Street2, Converter={StaticResource StringEmptyConverter}}"/>
+                                            <StackPanel Orientation="Horizontal">
+                                                <TextBlock Text="{Binding SelectedFund.Initiator.InitiatorAddress.ZipCode}"
+                                                       FontSize="{telerik:MaterialResource ResourceKey=FontSizeS}"/>
+                                                <TextBlock Text="{Binding SelectedFund.Initiator.InitiatorAddress.City}"
+                                                       FontSize="{telerik:MaterialResource ResourceKey=FontSizeS}"
+                                                           Margin="5 0 0 0"/>
+                                            </StackPanel>
+
+                                        </StackPanel>
+                                        <StackPanel Margin="0 20 0 0">
+                                            <TextBlock Text="Kontakt"
+                                                       FontSize="{telerik:MaterialResource ResourceKey=FontSizeS}"/>
+                                            <TextBlock Text="{Binding SelectedFund.Initiator.Advisor.FullName}"
+                                                       FontSize="{telerik:MaterialResource ResourceKey=FontSizeS}"/>
+                                            <StackPanel Orientation="Horizontal">
+                                                <TextBlock Text="Tel: "
+                                                       FontSize="{telerik:MaterialResource ResourceKey=FontSizeS}"/>
+                                                <TextBlock Text="{Binding SelectedFund.Initiator.Advisor.Extension}"
+                                                       FontSize="{telerik:MaterialResource ResourceKey=FontSizeS}"
+                                                           Margin="5 0 0 0"/>
+                                            </StackPanel>
+                                            <StackPanel Orientation="Horizontal" 
+                                                        Visibility="{Binding SelectedFund.Initiator.Advisor.FaxExtension, Converter={StaticResource StringEmptyConverter}}">
+                                                <TextBlock Text="Fax: "
+                                                       FontSize="{telerik:MaterialResource ResourceKey=FontSizeS}"/>
+                                                <TextBlock Text="{Binding SelectedFund.Initiator.Advisor.FaxExtension}"
+                                                       FontSize="{telerik:MaterialResource ResourceKey=FontSizeS}"
+                                                           Margin="5 0 0 0"/>
+                                            </StackPanel>
+                                            <StackPanel Orientation="Horizontal" 
+                                                        Visibility="{Binding SelectedFund.Initiator.Advisor.EmailAddress, Converter={StaticResource StringEmptyConverter}}">
+                                                <TextBlock Text="E-Mail: "
+                                                       FontSize="{telerik:MaterialResource ResourceKey=FontSizeS}"/>
+                                                <TextBlock Text="{Binding SelectedFund.Initiator.Advisor.EmailAddress}"
+                                                       FontSize="{telerik:MaterialResource ResourceKey=FontSizeS}"
+                                                           Margin="5 0 0 0"/>
+                                            </StackPanel>
+                                        </StackPanel>
+
+                                    </StackPanel>
+                                </Grid>
+                                <!-- Row 2 Betreff -->
+
+                                <StackPanel Grid.Row="2">
+                                    <TextBlock Text="Betreffzeile:" FontSize="{telerik:MaterialResource ResourceKey=FontSizeS}" Margin="0 0 0 5"/>
+                                    <TextBlock Text="{Binding SelectedFund.SubjectForLetter}" FontWeight="Bold"
+                                                   FontSize="{telerik:MaterialResource ResourceKey=FontSizeL}"/>
+                                </StackPanel>
+
+                                <!-- Row 3 Fussbereich der Anschreiben -->
+                                <StackPanel Grid.Row="3">
+                                    <TextBlock Text="Fussbereich" FontSize="{telerik:MaterialResource ResourceKey=FontSizeS}" Margin="0 0 0 5"/>
+                                    <TextBlock Text="{Binding SelectedFund.Initiator.FooterLine1}" HorizontalAlignment="Center"></TextBlock>
+                                    <TextBlock Text="{Binding SelectedFund.Initiator.FooterLine2}" HorizontalAlignment="Center"></TextBlock>
+                                    <TextBlock Text="{Binding SelectedFund.Initiator.FooterLine3}" HorizontalAlignment="Center"></TextBlock>
+                                </StackPanel>
+
+
+                            </Grid>
+
+
+                        </DockPanel>
+                    </ScrollViewer>
+                </Border>
+            </TabItem>
+            <TabItem Header="Bankkonten">
+                <Border Margin="10,20,0,0">
+                    <views:EditAccountCollections/>
+                </Border>
+
+            </TabItem>
+            <TabItem Header="Performance-Erwartung">
+                <Border Margin="10,20,0,0">
+                    <StackPanel>
+                        <TextBlock Text="Erwartungen wurden übertroffen, wenn IRR bzw. MM folgende Ergebnisse übersteigen"
+                                   Margin="0 20 0 30" FontSize="{telerik:MaterialResource ResourceKey=FontSizeL}"/>
+                        <telerik:DataFormDataField Label="IRR" DataMemberBinding="{Binding SelectedFund.PositiveIrr, StringFormat=N1}"/>
+                        <telerik:DataFormDataField Label="MM" DataMemberBinding="{Binding SelectedFund.PositiveMM, StringFormat=N2}"/>
+                        <TextBlock Text="Erwartungen wurden enttäuscht, wenn IRR bzw. MM folgende Ergebnisse nicht erreichen"
+                                    Margin="0 20 0 30" FontSize="{telerik:MaterialResource ResourceKey=FontSizeL}"/>
+                        <telerik:DataFormDataField Label="IRR" DataMemberBinding="{Binding SelectedFund.NegativeIrr, StringFormat=N1}"/>
+                        <telerik:DataFormDataField Label="MM" DataMemberBinding="{Binding SelectedFund.NegativeMM, StringFormat=N2}"/>
+                    </StackPanel>
+                </Border>
+            </TabItem>
+        </TabControl>
+
+    </Grid>
+</UserControl>
+

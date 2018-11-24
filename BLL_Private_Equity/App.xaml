@@ -1,9 +1,13 @@
 ﻿<Application x:Class="BLL_Private_Equity.App"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             xmlns:local="clr-namespace:BLL_Private_Equity"
-             StartupUri="MainWindow.xaml">
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
     <Application.Resources>
-         
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <!-- The following resource contains the Glyph symbols -->
+                <ResourceDictionary Source="/Telerik.Windows.Controls;component/Themes/FontResources.xaml"/>
+                <ResourceDictionary Source="/Styles/ApplicationStyles.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
     </Application.Resources>
 </Application>
